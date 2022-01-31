@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c61ff82cbf0142a401a48a8161e1595a",
+    "content-hash": "f9e8490d9a01a7403fdc85c344e51640",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,62 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.1.1"
             },
             "time": "2022-01-18T09:12:03+00:00"
+        },
+        {
+            "name": "aw-studio/snippets",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aw-studio/snippets.git",
+                "reference": "0c33354a2f4b1d8c2c92bade81868302fae85352"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aw-studio/snippets/zipball/0c33354a2f4b1d8c2c92bade81868302fae85352",
+                "reference": "0c33354a2f4b1d8c2c92bade81868302fae85352",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.3",
+                "illuminate/support": "^8",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "phpunit/phpunit": "^9.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AwStudio\\Snippets\\SnippetsServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AwStudio\\Snippets\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jannescb",
+                    "email": "jannes@aw-studio.de"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/aw-studio/snippets/issues",
+                "source": "https://github.com/aw-studio/snippets/tree/main"
+            },
+            "time": "2022-01-31T11:49:50+00:00"
         },
         {
             "name": "brick/math",
@@ -960,6 +1016,75 @@
             "time": "2021-10-06T17:43:30+00:00"
         },
         {
+            "name": "inertiajs/inertia-laravel",
+            "version": "v0.5.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inertiajs/inertia-laravel.git",
+                "reference": "6a050ce04a710ac4809161558ac09fe49f13075e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inertiajs/inertia-laravel/zipball/6a050ce04a710ac4809161558ac09fe49f13075e",
+                "reference": "6a050ce04a710ac4809161558ac09fe49f13075e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": "^6.0|^7.0|^8.74|^9.0",
+                "php": "^7.2|~8.0.0|~8.1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^4.0|^5.0|^6.4|^7.0",
+                "phpunit/phpunit": "^8.0|^9.5.8",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Inertia\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inertia\\": "src"
+                },
+                "files": [
+                    "./helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonathan Reinink",
+                    "email": "jonathan@reinink.ca",
+                    "homepage": "https://reinink.ca"
+                }
+            ],
+            "description": "The Laravel adapter for Inertia.js.",
+            "keywords": [
+                "inertia",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/inertiajs/inertia-laravel/issues",
+                "source": "https://github.com/inertiajs/inertia-laravel/tree/v0.5.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/reinink",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-01-18T10:59:08+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v8.81.0",
             "source": {
@@ -1658,6 +1783,54 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+        },
+        {
+            "name": "macramejs/macrame-laravel",
+            "version": "v0.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/macramejs/macrame-laravel.git",
+                "reference": "a313f05f4a5ec4a39a5772ad227c61a71204bca7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/macramejs/macrame-laravel/zipball/a313f05f4a5ec4a39a5772ad227c61a71204bca7",
+                "reference": "a313f05f4a5ec4a39a5772ad227c61a71204bca7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.46",
+                "illuminate/support": "^8.46",
+                "inertiajs/inertia-laravel": "^0.4|^0.5"
+            },
+            "require-dev": {
+                "php": "^8.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Macrame\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lennart Carstens-Behrens",
+                    "email": "lennart.carbe@gmail.com"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/macramejs/macrame-laravel/issues",
+                "source": "https://github.com/macramejs/macrame-laravel/tree/v0.0.2"
+            },
+            "time": "2022-01-31T10:51:57+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7886,7 +8059,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "aw-studio/snippets": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

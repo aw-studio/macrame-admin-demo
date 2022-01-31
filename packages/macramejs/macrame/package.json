@@ -1,0 +1,5 @@
+{
+    "name": "@macramejs/macrame",
+    "typings": "macrame/packages/macrame/types/index.d.ts",
+    "main": "macrame/packages/macrame/src/index.js"
+}

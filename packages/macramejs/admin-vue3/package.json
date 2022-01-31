@@ -1,0 +1,8 @@
+{
+    "name": "@macramejs/admin-vue3",
+    "typings": "admin/packages/admin-vue3/index.d.ts",
+    "main": "admin/packages/admin-vue3/src/index.ts",
+    "files": [
+        "admin/packages/admin-vue3/tailwind.config.js"
+    ]
+}

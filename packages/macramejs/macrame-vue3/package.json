@@ -1,0 +1,5 @@
+{
+    "name": "@macramejs/macrame-vue3",
+    "typings": "macrame/packages/macrame-vue3/index.d.ts",
+    "main": "macrame/packages/macrame-vue3/src/index.ts"
+}
