@@ -10,6 +10,7 @@
             <Badge pink class="m-2">Foo</Badge>
             <Badge orange class="m-2">Foo</Badge>
             <Badge lightorange class="m-2">Foo</Badge>
+            <Badge red class="m-2">Foo</Badge>
             <Badge blue class="m-2">Foo</Badge>
             <Badge lightblue class="m-2">Foo</Badge>
         </div>

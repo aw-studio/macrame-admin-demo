@@ -22,6 +22,7 @@
             <template v-slot:tab-list>
                 <Tab>Buttons</Tab>
                 <Tab>Badges</Tab>
+                <Tab>Select</Tab>
                 <Tab>Checkbox</Tab>
                 <Tab>Modal</Tab>
                 <Tab>Radio</Tab>
@@ -32,12 +33,19 @@
                 <Tab>Slider</Tab>
                 <Tab>Wysiwyg</Tab>
                 <Tab>Text</Tab>
+                <Tab>Meta</Tab>
             </template>
             <TabPanel>
                 <Buttons />
             </TabPanel>
             <TabPanel>
                 <Badges />
+            </TabPanel>
+            <TabPanel>
+                <div class="p-24">
+                    <Select v-model="selected" :options="options" />
+                    <div class="mt-4">Selected Value: {{ selected }}</div>
+                </div>
             </TabPanel>
             <TabPanel>
                 <Checkboxes />
@@ -81,6 +89,7 @@
                 <Wysiwyg />
             </TabPanel>
             <TextTab />
+            <MetaTab />
         </TabGroup>
     </Admin>
 </template>
@@ -93,9 +102,10 @@ import {
     Tab,
     TabPanel,
     TabGroup,
+    Select,
     Card,
     Input,
-} from '../../../../../packages/macramejs/admin-vue3';
+} from '@macramejs/admin-vue3';
 import { ref } from 'vue';
 import Buttons from './tabs/Buttons.vue';
 import Badges from './tabs/Badges.vue';
@@ -106,10 +116,20 @@ import Toggles from './tabs/Toggles.vue';
 import DatePickers from './tabs/DatePickers.vue';
 import TextTab from './tabs/TextTab.vue';
 import Wysiwyg from './tabs/Wysiwyg.vue';
+import MetaTab from './tabs/Meta.vue';
 
 const text = ref('');
 
 const number = ref(0);
 
 const toggle = ref(false);
+
+const options = [
+    { value: null, label: 'Wählen sie aus asdadadada' },
+    { value: 1, label: 'Eins' },
+    { value: 2, label: 'Zwei' },
+    { value: 3, label: 'Drei' },
+];
+
+const selected = ref(options[0].value);
 </script>
