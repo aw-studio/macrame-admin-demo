@@ -19,7 +19,7 @@
         <template v-slot:topbar-left> Topbar Left </template>
         <template v-slot:topbar-right> Topbar Right </template>
         <TabGroup>
-            <template v-slot:tab-list>
+            <TabList>
                 <Tab>Buttons</Tab>
                 <Tab>Badges</Tab>
                 <Tab>Select</Tab>
@@ -34,7 +34,7 @@
                 <Tab>Wysiwyg</Tab>
                 <Tab>Text</Tab>
                 <Tab>Meta</Tab>
-            </template>
+            </TabList>
             <TabPanel>
                 <Buttons />
             </TabPanel>
@@ -102,6 +102,7 @@ import {
     Tab,
     TabPanel,
     TabGroup,
+    TabList,
     Select,
     Card,
     Input,
