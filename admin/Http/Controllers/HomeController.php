@@ -18,7 +18,7 @@ class HomeController
     }
 
     /**
-     * Show the home page for the admin application.
+     * Show the components page for the admin application.
      *
      * @param  Page $page
      * @return Page

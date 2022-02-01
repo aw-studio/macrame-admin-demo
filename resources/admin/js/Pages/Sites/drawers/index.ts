@@ -1,0 +1,1 @@
+export {default as TextDrawer} from './TextDrawer.vue'

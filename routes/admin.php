@@ -4,12 +4,19 @@ use Admin\Http\Controllers\Auth\AuthenticatedSessionController;
 use Admin\Http\Controllers\Auth\NewPasswordController;
 use Admin\Http\Controllers\Auth\PasswordResetLinkController;
 use Admin\Http\Controllers\HomeController;
+use Admin\Http\Controllers\SiteController;
 use Admin\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
     'middleware' => AuthenticateAdmin::class,
 ], function () {
+    Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
+    Route::get('/sites/items', [SiteController::class, 'items'])->name('sites.items');
+    Route::get('/sites/{site}', [SiteController::class, 'show'])->name('sites.show');
+    Route::post('/sites/{site}', [SiteController::class, 'update'])->name('sites.update');
+    Route::post('/sites/{site}/upload', [SiteController::class, 'upload'])->name('sites.upload');
+
     Route::get('/', [HomeController::class, 'show']);
     Route::get('/components', [HomeController::class, 'components']);
 });

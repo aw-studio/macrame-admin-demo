@@ -9,6 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "astrotomic/laravel-fileable": "^0.3.0",
+        "aw-studio/laravel-sites": "dev-main",
         "aw-studio/snippets": "dev-main",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
