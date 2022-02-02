@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-span-full md:col-span-5">
                     <Card class="flex flex-col gap-5">
-                        <FormField hint="Open Graph Image">
+                        <!--<FormField hint="Open Graph Image">
                             <FormFieldLabel>OG Image</FormFieldLabel>
                             <input
                                 type="file"
@@ -59,13 +59,11 @@
                                 class="w-full"
                                 @input="setImage"
                             />
-                            <img
-                                v-if="meta.og.image"
-                                :src="`/${meta.og.image}`"
-                                alt=""
-                                class="object-cover w-full h-40"
+                            <FileUpload
+                                accept="image/*"
+                                v-model="meta.og.image"
                             />
-                        </FormField>
+                        </FormField>-->
                         <FormField hint="Open Graph Title" no-label>
                             <Input
                                 class="w-full"
