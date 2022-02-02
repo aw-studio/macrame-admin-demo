@@ -14,6 +14,11 @@
                                 <TextDrawer :draws="TextSection" />
                             </Cabinet>
                         </DrawerSection>
+                        <DrawerSection title="Other">
+                            <Cabinet>
+                                <CardsDrawer :draws="CardsSection" />
+                            </Cabinet>
+                        </DrawerSection>
                     </template>
                     <div class="flex py-4">
                         <div class="container">
@@ -45,7 +50,7 @@ import {
 } from '@macramejs/admin-vue3';
 import { TabPanels } from '@headlessui/vue';
 import { TextSection, CardsSection, UploadSection } from './sections';
-import { TextDrawer } from './drawers';
+import { TextDrawer, CardsDrawer } from './drawers';
 import { Cabinet } from '@macramejs/page-builder-vue3';
 import BaseLayout from './Index.vue';
 
@@ -66,7 +71,7 @@ const form = useForm(
 
 const sections = {
     text: TextSection,
-    // cards: CardsSection,
+    cards: CardsSection,
     // upload: UploadSection,
 };
 </script>

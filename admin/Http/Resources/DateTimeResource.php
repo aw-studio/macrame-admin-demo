@@ -25,7 +25,7 @@ class DateTimeResource extends JsonResource
      */
     public function toArray($request)
     {
-        $this->setLocale('de');
+        $this->setLocale(app()->getLocale());
 
         return [
             'readable_diff' => $this->diffForHumans(),

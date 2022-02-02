@@ -10,5 +10,6 @@ export type State = {
     value: string,
 }
 
-export type DateTimesResource = Resource<DateTime>;
-export type StatesResource = Resource<State>;
+export type DateTimeResource = Resource<DateTime>;
+export type StateResource = Resource<State>;
+export type StatesCollectionResource = CollectionResource<State>;

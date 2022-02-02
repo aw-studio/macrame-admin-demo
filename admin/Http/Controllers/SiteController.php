@@ -37,8 +37,11 @@ class SiteController
 
     public function show(Page $page, Site $site)
     {
-        return $page->page('Sites/Show')
-            ->with('site', $site->load('files'));
+        $site->load('files');
+
+        return $page
+            ->page('Sites/Show')
+            ->with('site', $site);
     }
 
     public function update(Request $request, Site $site)
