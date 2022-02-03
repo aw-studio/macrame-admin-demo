@@ -24,8 +24,6 @@
         <template v-slot:sidebar-secondary>
             <SitesList :list="list" />
         </template>
-        <template v-slot:topbar-left> Topbar Left </template>
-        <template v-slot:topbar-right> Topbar Right </template>
         <slot />
     </Admin>
 </template>
@@ -40,21 +38,21 @@ import { useList } from '@macramejs/macrame-vue3';
 import { SidebarSecondary, Button } from '@macramejs/admin-vue3';
 
 const props = defineProps({
-    pages: {
+    sites: {
         type: Array,
         required: true,
     },
 });
 
-type Page = {
+type Site = {
     content: { [key: string]: any };
     id: number;
     name: string;
 };
 
-const items = ref(props.pages);
+const items = ref(props.sites);
 
-const list = useList<Page>([
+const list = useList<Site>([
     {
         children: [
             {
@@ -95,7 +93,7 @@ function handleAddButtonClick() {
 watch(
     () => items.value,
     value => {
-        Inertia.post('/admin/pages/sort', value as any);
+        Inertia.post('/admin/sites/sort', value as any);
     },
     { deep: true }
 );

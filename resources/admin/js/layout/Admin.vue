@@ -15,7 +15,9 @@
             <slot name="topbar-left" />
         </template>
         <template v-slot:topbar-right>
-            <slot name="topbar-right" />
+            <TopbarRight>
+                <slot name="topbar-right" />
+            </TopbarRight>
         </template>
         <template v-slot:topbar-secondary>
             <slot name="topbar-secondary" />
@@ -27,6 +29,7 @@
 <script setup lang="ts">
 import { DefaultLayout, SidebarSecondary } from '@macramejs/admin-vue3';
 import SidebarPrimary from './SidebarPrimary.vue';
+import TopbarRight from './TopbarRight.vue';
 
 defineProps({
     sidebarSecondary: {

@@ -4,7 +4,7 @@ namespace Admin\Http\Controllers;
 
 use Admin\Http\Indexes\SiteIndex;
 use Admin\Ui\Page;
-use AwStudio\Sites\Models\Site;
+use App\Models\Site;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 

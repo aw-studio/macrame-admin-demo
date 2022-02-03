@@ -1,0 +1,1 @@
+export { default as ExampleTemplate } from './ExampleTemplate.vue';

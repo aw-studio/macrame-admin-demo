@@ -17,7 +17,7 @@ class Site extends Model implements Fileable
      * @var array
      */
     protected $fillable = [
-        'content', 'name', 'slug',
+        'content', 'name', 'slug', 'template',
     ];
 
     /**
@@ -26,6 +26,7 @@ class Site extends Model implements Fileable
      * @var array
      */
     protected $casts = [
-        'content' => 'json',
+        'content'    => 'json',
+        'attributes' => 'json',
     ];
 }

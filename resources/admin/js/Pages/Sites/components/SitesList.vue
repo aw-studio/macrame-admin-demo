@@ -1,5 +1,5 @@
 <template>
-    <List :list="list" :group="{ name: 'pages-list' }">
+    <List :list="list" :group="{ name: 'sites-list' }">
         <template v-slot:default="{ item }">
             <Link
                 class="flex-1 py-1 cursor-pointer"

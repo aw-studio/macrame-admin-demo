@@ -22,6 +22,11 @@
                     </template>
                     <div class="flex py-4">
                         <div class="container">
+                            <component
+                                v-if="form.template in templates"
+                                :is="templates[form.template]"
+                                :form="form"
+                            />
                             <Sections
                                 v-model="form.content"
                                 :sections="sections"
@@ -35,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps, watch } from 'vue';
 import { Admin } from '@admin/layout';
 import Layout from './package/Layout.vue';
 import { useForm } from '@macramejs/macrame-vue3';
@@ -53,6 +58,8 @@ import { TextSection, CardsSection, UploadSection } from './sections';
 import { TextDrawer, CardsDrawer } from './drawers';
 import { Cabinet } from '@macramejs/page-builder-vue3';
 import BaseLayout from './Index.vue';
+import { saveQueue } from '@admin/modules/save-queue';
+import { ExampleTemplate } from './templates';
 
 const props = defineProps({
     site: {
@@ -61,17 +68,35 @@ const props = defineProps({
     },
 });
 
-const form = useForm(
-    `/admin/sites/${props.site.id}`,
-    {
-        content: props.site.content,
-    },
-    { method: 'post' }
-);
+const form = useForm(`/admin/sites/${props.site.id}`, props.site, {
+    method: 'post',
+});
 
 const sections = {
     text: TextSection,
     cards: CardsSection,
     // upload: UploadSection,
 };
+
+const templates = {
+    ExampleTemplate,
+};
+
+watch(
+    form,
+    () => {
+        const queueKey = `site.${props.site.id}.content`;
+        console.log({ isDirty: form.isDirty });
+        console.log(saveQueue);
+
+        if (form.isDirty) {
+            saveQueue.add(queueKey, async () => form.submit());
+        } else {
+            saveQueue.remove(queueKey);
+        }
+
+        console.log(saveQueue);
+    },
+    { immediate: true, deep: true }
+);
 </script>

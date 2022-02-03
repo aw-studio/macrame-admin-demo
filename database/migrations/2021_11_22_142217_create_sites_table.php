@@ -17,7 +17,10 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('template')->nullable();
             $table->text('content');
+            $table->text('attributes');
+            $table->foreignId('parent_id')->nullable();
             $table->timestamps();
         });
     }
