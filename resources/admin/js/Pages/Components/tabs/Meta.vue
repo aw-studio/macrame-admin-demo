@@ -5,7 +5,7 @@
                 Meta Informationen
             </span>
             <div class="grid grid-cols-12 gap-6">
-                <div class="col-span-full md:col-span-7">
+                <div class="col-span-full md:col-span-9">
                     <Card class="flex flex-col gap-5">
                         <FormField no-label>
                             <Input
@@ -28,28 +28,26 @@
                                 v-model="meta.keywords"
                             />
                         </FormField>
-                        <div class="mt-4">
+                        <div class="mt-4 max-w-[600px]">
                             <span class="inline-block pb-4 text-lg">
-                                Search Engine Preview:
+                                Vorschau:
                             </span>
-                            <div class="text-xl text-[#1a0dab] pb-0.5">
-                                {{ meta.title }}
-                            </div>
-                            <div
-                                class="text-base flex text-[#006621] gap-1 pb-1"
-                            >
+                            <div class="text-base flex text-[#202124] gap-1">
                                 <span class="inline-block">
                                     {{ location }}
                                 </span>
                                 <span class="inline-block">› ...</span>
                             </div>
-                            <div class="text-sm text-[#222222] pb-0.5">
-                                {{ meta.description }}
+                            <div class="text-[20px] text-[#1a0dab]">
+                                {{ meta.title }}
+                            </div>
+                            <div class="text-base text-[#4d5156]">
+                                {{ descriptionPreview }}
                             </div>
                         </div>
                     </Card>
                 </div>
-                <div class="col-span-full md:col-span-5">
+                <div class="col-span-full md:col-span-9">
                     <Card class="flex flex-col gap-5">
                         <!--<FormField hint="Open Graph Image">
                             <FormFieldLabel>OG Image</FormFieldLabel>
@@ -103,12 +101,11 @@
                 </div>
             </div>
         </div>
-        <pre>{{ meta }}</pre>
     </TabPanel>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { computed, reactive } from 'vue';
 import {
     TabPanel,
     DrawerSection,
@@ -127,6 +124,19 @@ const setImage = event => {
 
     meta.og.image = event.target.files[0].name;
 };
+
+const descriptionPreview = computed(() => {
+    if (meta.description?.length > 160) {
+        let trimmedString = meta.description?.substr(0, 160).substr(0, 160);
+        //re-trim if we are in the middle of a word
+        trimmedString = trimmedString.substr(
+            0,
+            Math.min(trimmedString.length, trimmedString.lastIndexOf(' '))
+        );
+        return `${trimmedString} \u2026`;
+    }
+    return meta.description;
+});
 
 const meta = reactive({
     title: null,
