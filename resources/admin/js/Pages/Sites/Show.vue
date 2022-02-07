@@ -1,5 +1,5 @@
 <template>
-    <BaseLayout>
+    <BaseLayout v-bind="$attrs">
         <TabGroup>
             <TabList>
                 <Tab> Content </Tab>
@@ -36,6 +36,12 @@
                 </TabPanel>
             </TabPanels>
         </TabGroup>
+        <template v-slot:topbar-left>
+            <span>{{ form.name }}</span>
+            <div class="ml-4 text-sm text-gray">
+                {{ form.full_slug }}
+            </div>
+        </template>
     </BaseLayout>
 </template>
 
@@ -60,15 +66,16 @@ import { Cabinet } from '@macramejs/page-builder-vue3';
 import BaseLayout from './Index.vue';
 import { saveQueue } from '@admin/modules/save-queue';
 import { ExampleTemplate } from './templates';
+import { SiteResource } from '@admin/modules/resources';
 
 const props = defineProps({
     site: {
-        type: Object,
+        type: Object as PropType<SiteResource>,
         required: true,
     },
 });
 
-const form = useForm(`/admin/sites/${props.site.id}`, props.site, {
+const form = useForm(`/admin/sites/${props.site.data.id}`, props.site.data, {
     method: 'post',
 });
 
@@ -85,7 +92,7 @@ const templates = {
 watch(
     form,
     () => {
-        const queueKey = `site.${props.site.id}.content`;
+        const queueKey = `site.${props.site.data.id}.content`;
         console.log({ isDirty: form.isDirty });
         console.log(saveQueue);
 

@@ -4,12 +4,9 @@
             <SidebarPrimary />
         </template>
         <template v-if="sidebarSecondary" v-slot:sidebar-secondary>
-            <SidebarSecondary>
-                <template v-slot:header>
-                    <slot name="sidebar-secondary-header" />
-                </template>
-                <slot name="sidebar-secondary" />
-            </SidebarSecondary>
+            <slot name="sidebar-secondary">
+                <SidebarSecondary />
+            </slot>
         </template>
         <template v-slot:topbar-left>
             <slot name="topbar-left" />

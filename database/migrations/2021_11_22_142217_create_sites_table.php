@@ -20,6 +20,8 @@ class CreateSitesTable extends Migration
             $table->string('template')->nullable();
             $table->text('content');
             $table->text('attributes');
+            $table->boolean('is_live')->default(false);
+            $table->integer('order_column')->default(0);
             $table->foreignId('parent_id')->nullable();
             $table->timestamps();
         });

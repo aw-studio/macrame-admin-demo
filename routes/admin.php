@@ -15,6 +15,8 @@ Route::group([
     Route::get('/sites', [SiteController::class, 'index'])->name('sites.index');
     Route::get('/sites/items', [SiteController::class, 'items'])->name('sites.items');
     Route::get('/sites/{site}', [SiteController::class, 'show'])->name('sites.show');
+    Route::post('/sites', [SiteController::class, 'store'])->name('sites.store');
+    Route::post('/sites/order', [SiteController::class, 'order'])->name('sites.order');
     Route::post('/sites/{site}', [SiteController::class, 'update'])->name('sites.update');
     Route::post('/sites/{site}/upload', [SiteController::class, 'upload'])->name('sites.upload');
 
