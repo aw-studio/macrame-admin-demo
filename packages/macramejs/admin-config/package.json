@@ -1,4 +1,4 @@
 {
     "name": "@macramejs/admin-config",
-    "main": "/admin/packages/admin-config/tailwind.config.js"
+    "main": "admin/packages/admin-config/tailwind.config.js"
 }

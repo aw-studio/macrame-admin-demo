@@ -3,6 +3,7 @@
 use Admin\Http\Controllers\Auth\AuthenticatedSessionController;
 use Admin\Http\Controllers\Auth\NewPasswordController;
 use Admin\Http\Controllers\Auth\PasswordResetLinkController;
+use Admin\Http\Controllers\FileController;
 use Admin\Http\Controllers\HomeController;
 use Admin\Http\Controllers\SiteController;
 use Admin\Http\Middleware\AuthenticateAdmin;
@@ -19,6 +20,7 @@ Route::group([
 
     Route::get('/', [HomeController::class, 'show']);
     Route::get('/components', [HomeController::class, 'components']);
+    Route::get('/files', [FileController::class, 'index'])->name('files.index');
 });
 
 Route::group([
