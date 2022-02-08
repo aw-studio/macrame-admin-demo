@@ -1,10 +1,10 @@
 <template>
     <SidebarSecondary>
         <template v-slot:header>
-            <SitesSidebarHeader />
+            <PagesSidebarHeader />
         </template>
         <template v-slot:default>
-            <SitesSidebarBody :list="list" />
+            <PagesSidebarBody :list="list" />
         </template>
     </SidebarSecondary>
 </template>
@@ -13,24 +13,24 @@
 import { watch, PropType } from 'vue';
 import { SidebarSecondary } from '@macramejs/admin-vue3';
 import { useList, TList, RawListItem, RawList } from '@macramejs/macrame-vue3';
-import SitesSidebarHeader from './SitesSidebarHeader.vue';
-import SitesSidebarBody from './SitesSidebarBody.vue';
-import { SiteList as RawSiteList, Site } from '@admin/modules/resources';
+import PagesSidebarHeader from './PagesSidebarHeader.vue';
+import PagesSidebarBody from './PagesSidebarBody.vue';
+import { PageListItem, Page } from '@admin/modules/resources';
 import { saveQueue } from '@admin/modules/save-queue';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
-    sites: {
-        type: Object as PropType<RawSiteList[]>,
+    pages: {
+        type: Object as PropType<PageListItem[]>,
         required: true,
     },
 });
 
-type SiteList = TList<Site>;
+type PageList = TList<Page>;
 
-const list: SiteList = useList<Site>(props.sites);
+const list: PageList = useList<Page>(props.pages);
 
-function parseListOrder(list: SiteList) {
+function parseListOrder(list: PageList) {
     let order = [];
 
     for (let i = 0; i < list.items.length; i++) {
@@ -46,21 +46,21 @@ function parseListOrder(list: SiteList) {
 watch(
     list,
     () => {
-        const queueKey = `sites.order`;
+        const queueKey = `pages.order`;
         const order: any = parseListOrder(list);
         console.log({ order });
 
         saveQueue.add(queueKey, async () => {
-            Inertia.post('/admin/sites/order', { order });
+            Inertia.post('/admin/pages/order', { order });
         });
     },
     { immediate: true, deep: true }
 );
 
 watch(
-    () => props.sites,
+    () => props.pages,
     () => {
-        list.setItems(props.sites);
+        list.setItems(props.pages);
     },
     { immediate: true, deep: true }
 );

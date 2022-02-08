@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e771a28b4080ae92a4936f619b8c543",
+    "content-hash": "2a25987145a549d07379f3a5edcb31e0",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1996,6 +1996,50 @@
                 }
             ],
             "time": "2021-11-21T11:48:40+00:00"
+        },
+        {
+            "name": "macramejs/cms-laravel",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/macrame/cms-laravel",
+                "reference": "2f518cdc9a71e7806fd275f3e29bbc02273e6c9a"
+            },
+            "require": {
+                "illuminate/contracts": "^8.46",
+                "illuminate/support": "^8.46",
+                "inertiajs/inertia-laravel": "^0.4|^0.5"
+            },
+            "require-dev": {
+                "php": "^8.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/Support/helpers.php"
+                ],
+                "psr-4": {
+                    "Macrame\\Cms\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lennart Carstens-Behrens",
+                    "email": "lennart.carbe@gmail.com"
+                }
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "macramejs/macrame-laravel",
@@ -8274,7 +8318,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "aw-studio/laravel-sites": 20,
-        "aw-studio/snippets": 20
+        "aw-studio/snippets": 20,
+        "macramejs/cms-laravel": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

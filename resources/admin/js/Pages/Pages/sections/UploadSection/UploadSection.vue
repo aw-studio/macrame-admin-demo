@@ -24,7 +24,7 @@
                 {{ form.progress.percentage }}%
             </progress>
         </div>
-        <FileExplorer :files="site.files" v-model="model.file">
+        <FileExplorer :files="pages.files" v-model="model.file">
             <div v-if="selectedFile">
                 <img :src="`/storage/files/${selectedFile}`" class="rounded" />
             </div>
@@ -69,12 +69,12 @@ const form = useForm({
     file: props.modelValue.file,
 });
 
-const site: any = computed(() => {
-    return usePage().props.value?.site;
+const page: any = computed(() => {
+    return usePage().props.value?.page;
 });
 
 const submit = () => {
-    form.post(`/admin/sites/${site.value.id}/upload`, {
+    form.post(`/admin/pages/${page.value.id}/upload`, {
         onSuccess: () => {
             form.reset();
         },
@@ -82,7 +82,7 @@ const submit = () => {
 };
 
 const selectedFile: any = computed(() => {
-    return site.value.files?.find((image: any) => image.id == model.file)
+    return page.value.files?.find((image: any) => image.id == model.file)
         ?.filepath;
 });
 

@@ -1,6 +1,6 @@
 <template>
     <Modal :open="true" v-bind="$attrs" md>
-        <h2>New Site</h2>
+        <h2>New Page</h2>
         <div>
             <Input label="Name" v-model="form.name" />
             <Select
@@ -18,12 +18,12 @@
 import { defineEmits } from 'vue';
 import { Modal, Input, Select, Button } from '@macramejs/admin-vue3';
 import { useForm } from '@macramejs/macrame-vue3';
-import { templateOptions } from './../templates';
+import { templateOptions } from '../templates';
 
-const emit = defineEmits(['siteAdded', 'close']);
+const emit = defineEmits(['pageAdded', 'close']);
 
 const form = useForm(
-    `/admin/sites`,
+    `/admin/pages`,
     {
         name: '',
         template: '',
@@ -31,7 +31,7 @@ const form = useForm(
     {
         method: 'post',
         onSuccess() {
-            emit('siteAdded', this);
+            emit('pageAdded', this);
             emit('close');
         },
     }
