@@ -12,7 +12,13 @@
 <script lang="ts" setup>
 import { watch, PropType } from 'vue';
 import { SidebarSecondary } from '@macramejs/admin-vue3';
-import { useList, TList, RawListItem, RawList } from '@macramejs/macrame-vue3';
+import {
+    useList,
+    TList,
+    RawListItem,
+    RawList,
+    useOriginal,
+} from '@macramejs/macrame-vue3';
 import PagesSidebarHeader from './PagesSidebarHeader.vue';
 import PagesSidebarBody from './PagesSidebarBody.vue';
 import { PageListItem, Page } from '@admin/modules/resources';
@@ -43,16 +49,22 @@ function parseListOrder(list: PageList) {
     return order;
 }
 
+let originalOrder = useOriginal(parseListOrder(list));
+
 watch(
     list,
     () => {
         const queueKey = `pages.order`;
         const order: any = parseListOrder(list);
-        console.log({ order });
 
-        saveQueue.add(queueKey, async () => {
-            Inertia.post('/admin/pages/order', { order });
-        });
+        if (originalOrder.matches(order)) {
+            saveQueue.remove(queueKey);
+        } else {
+            saveQueue.add(queueKey, async () => {
+                originalOrder.update(order);
+                Inertia.post('/admin/pages/order', { order });
+            });
+        }
     },
     { immediate: true, deep: true }
 );

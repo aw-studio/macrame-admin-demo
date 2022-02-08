@@ -30272,28 +30272,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return order;
     }
 
+    var originalOrder = (0,_macramejs_macrame_vue3__WEBPACK_IMPORTED_MODULE_3__.useOriginal)(parseListOrder(list));
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.watch)(list, function () {
       var queueKey = "pages.order";
       var order = parseListOrder(list);
-      console.log({
-        order: order
-      });
-      _admin_modules_save_queue__WEBPACK_IMPORTED_MODULE_6__.saveQueue.add(queueKey, /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_7__.Inertia.post('/admin/pages/order', {
-                  order: order
-                });
 
-              case 1:
-              case "end":
-                return _context.stop();
+      if (originalOrder.matches(order)) {
+        _admin_modules_save_queue__WEBPACK_IMPORTED_MODULE_6__.saveQueue.remove(queueKey);
+      } else {
+        _admin_modules_save_queue__WEBPACK_IMPORTED_MODULE_6__.saveQueue.add(queueKey, /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  originalOrder.update(order);
+                  _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_7__.Inertia.post('/admin/pages/order', {
+                    order: order
+                  });
+
+                case 2:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee);
-      })));
+          }, _callee);
+        })));
+      }
     }, {
       immediate: true,
       deep: true
@@ -30310,6 +30314,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       props: props,
       list: list,
       parseListOrder: parseListOrder,
+      originalOrder: originalOrder,
       SidebarSecondary: _macramejs_admin_vue3__WEBPACK_IMPORTED_MODULE_2__.SidebarSecondary,
       PagesSidebarHeader: _PagesSidebarHeader_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
       PagesSidebarBody: _PagesSidebarBody_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -36514,13 +36519,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "useForm": () => (/* reexport safe */ _useForm__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   "useList": () => (/* reexport safe */ _useList__WEBPACK_IMPORTED_MODULE_2__["default"]),
 /* harmony export */   "useSaveQueue": () => (/* reexport safe */ _useSaveQueue__WEBPACK_IMPORTED_MODULE_3__["default"]),
-/* harmony export */   "Input": () => (/* reexport safe */ _input__WEBPACK_IMPORTED_MODULE_4__["default"])
+/* harmony export */   "useOriginal": () => (/* reexport safe */ _useOriginal__WEBPACK_IMPORTED_MODULE_4__["default"]),
+/* harmony export */   "Input": () => (/* reexport safe */ _input__WEBPACK_IMPORTED_MODULE_5__["default"])
 /* harmony export */ });
 /* harmony import */ var _useIndex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./useIndex */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useIndex.ts");
 /* harmony import */ var _useForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./useForm */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useForm.ts");
 /* harmony import */ var _useList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useList */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useList.ts");
 /* harmony import */ var _useSaveQueue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./useSaveQueue */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useSaveQueue.ts");
-/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./input */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/input.ts");
+/* harmony import */ var _useOriginal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./useOriginal */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useOriginal.ts");
+/* harmony import */ var _input__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./input */ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/input.ts");
+
 
 
 
@@ -36954,6 +36962,39 @@ var useList = function useList() {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useList);
+
+/***/ }),
+
+/***/ "./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useOriginal.ts":
+/*!******************************************************************************************!*\
+  !*** ./packages/macramejs/macrame-vue3/macrame/packages/macrame-vue3/src/useOriginal.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+var useOriginal = function useOriginal(value) {
+  var original = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+    raw: value,
+    stringified: JSON.stringify(value),
+    update: function update(value) {
+      this.raw = value;
+      this.stringified = JSON.stringify(value);
+    },
+    matches: function matches(value) {
+      return JSON.stringify(value) == this.stringified;
+    }
+  });
+  return original;
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useOriginal);
 
 /***/ }),
 
