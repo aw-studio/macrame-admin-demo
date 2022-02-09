@@ -2,7 +2,7 @@
     <div class="w-full mt-10">
         <div class="grid grid-cols-12 gap-5">
             <div
-                class="flex justify-center col-span-full max-w-[210px] max-h-[210px] md:col-span-6 xl:col-span-3"
+                class="flex justify-center col-span-full md:col-span-6 xl:col-span-3"
             >
                 <FileUpload url="/api/media" />
             </div>
@@ -19,57 +19,83 @@
                         v-model="selected"
                     />
                     <div
-                        class="absolute top-0 left-0 z-0 w-full h-full bg-indigo-900 border-[3px] border-transparent bg-opacity-0 hover:bg-opacity-80"
+                        class="absolute top-0 left-0 w-full cursor-pointer h-full bg-black border-[3px] border-transparent bg-opacity-0 hover:bg-opacity-80"
                     >
-                        <span
-                            class="absolute hidden text-base text-white top-2 left-4"
-                            >{{ file.author }}
-                        </span>
-                        <button
-                            class="absolute hidden bg-gray-200 right-4 p-0.5 z-10 rounded-[8px] bottom-2.5"
+                        <div
+                            class="absolute img-checkbox top-0 left-0 hidden items-center justify-center w-5 h-5 rounded-br-[6px] text-white bg-orange"
                         >
                             <svg
                                 width="24"
                                 height="24"
-                                stroke-width="1.5"
+                                class="scale-75 -translate-x-[3px] -translate-y-px"
+                                stroke-width="1"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
                                 <path
-                                    d="M18 12.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM12 12.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1ZM6 12.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z"
-                                    fill="currentColor"
+                                    d="m5 13 4 4L19 7"
                                     stroke="currentColor"
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                 />
                             </svg>
-                        </button>
+                        </div>
+                        <span
+                            class="absolute hidden text-base text-white top-2 right-4"
+                            >{{ file.author }}
+                        </span>
+                        <div
+                            class="absolute btn-wrapper hidden right-4 bottom-2.5"
+                        >
+                            <FileMenu />
+                        </div>
                     </div>
                     <img
                         v-if="file.download_url"
-                        class="object-contain w-full h-full"
+                        class="z-0 object-contain w-full h-full"
                         :src="file.download_url"
                         :alt="file.author"
                     />
                 </label>
             </div>
         </div>
-        <pre>{{ selected }}</pre>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, toRef, toRefs, watch } from 'vue';
+import { useDropzone } from 'vue3-dropzone';
 import { FileUpload } from '@macramejs/admin-vue3';
+import FileMenu from './FileMenu.vue';
+
+const emit = defineEmits(['update:modelValue']);
 
 const props = defineProps({
+    modelValue: {
+        type: Array,
+    },
     files: {
         type: Array,
         required: true,
     },
 });
 
+const test = () => {
+    console.log('dragover');
+};
+
+const testValue = ref(false);
+
 const selected = ref([]);
+const { modelValue } = toRefs(props);
+
+watch(modelValue, () => {
+    selected.value = modelValue.value;
+});
+
+watch(selected, () => {
+    emit('update:modelValue', selected.value);
+});
 </script>
 
 <style scoped>
@@ -77,11 +103,14 @@ const selected = ref([]);
     height: calc(100vh - 230px);
 }
 
-.img-container:hover button,
+.img-container:hover .btn-wrapper,
 .img-container:hover span {
     display: block !important;
 }
 .img-container > input:checked + div {
     border-color: #fead5e !important;
+}
+.img-container > input:checked + div > .img-checkbox {
+    display: flex !important;
 }
 </style>

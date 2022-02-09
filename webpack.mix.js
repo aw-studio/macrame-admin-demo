@@ -4,11 +4,11 @@ const path = require('path');
 
 // Admin-App
 mix.ts('resources/js/app.js', 'public/js').vue();
-mix.postCss('resources/css/app.css', 'public/css/app', [
+mix.postCss('resources/css/app.css', 'public/css', [
     tailwindcss('./tailwind.config.js'),
 ]);
 mix.alias({
-    '@app': path.join(__dirname, 'resources/app/js'),
+    '@app': path.join(__dirname, 'resources/js'),
 });
 
 // Admin-App

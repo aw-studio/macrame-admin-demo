@@ -8,12 +8,12 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": false,
     "paths": {
-        "@app/*": ["./resources/app/js/*"],
+        "@app/*": ["./resources/js/*"],
         "@admin/*": ["./resources/admin/js/*"],
     }
   },
   "include": [
-    "resources/app/js/**/*",
+    "resources/js/**/*",
     "resources/admin/js/**/*"
   ],
   "exclude": [
