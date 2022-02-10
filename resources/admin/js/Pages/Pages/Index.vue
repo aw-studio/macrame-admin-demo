@@ -1,7 +1,7 @@
 <template>
     <Admin sidebar-secondary>
         <template v-slot:sidebar-secondary>
-            <SitesSidebar :sites="sites.data" />
+            <PageSidebar :pages="pages.data" />
         </template>
         <template v-slot:topbar-left>
             <slot name="topbar-left" />
@@ -15,13 +15,13 @@ import { watch, ref, PropType } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Admin } from '@admin/layout';
 // import { showCreateModal, Create } from './components/Create';
-import SitesSidebar from './components/SitesSidebar.vue';
+import PageSidebar from './components/PagesSidebar.vue';
 import { SidebarSecondary, Button } from '@macramejs/admin-vue3';
-import { SiteListCollectionResource } from '@admin/modules/resources';
+import { PageListCollectionResource } from '@admin/modules/resources';
 
 const props = defineProps({
-    sites: {
-        type: Object as PropType<SiteListCollectionResource>,
+    pages: {
+        type: Object as PropType<PageListCollectionResource>,
         required: true,
     },
 });

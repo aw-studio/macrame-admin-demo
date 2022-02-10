@@ -1,0 +1,13 @@
+[submodule "packages/macramejs/admin-config/admin"]
+  path = packages/macramejs/admin-config/admin
+  url = git://github.com/macramejs/admin/tree/main/packages/admin-config
+[submodule "packages/macramejs/admin-vue3/admin"]
+  path = packages/macramejs/admin-vue3/admin
+  url = git://github.com/macramejs/admin/tree/main/packages/admin-vue3
+[submodule "packages/macramejs/macrame-vue3/macrame"]
+  path = packages/macramejs/macrame-vue3/macrame
+  url = git://github.com/macramejs/macrame/tree/main/packages/macrame-vue3
+[submodule "packages/macramejs/macrame/macrame"]
+  path = packages/macramejs/macrame/macrame
+  url = git://github.com/macramejs/macrame/tree/main/packages/macrame
+

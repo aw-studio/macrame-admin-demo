@@ -2,6 +2,12 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "packages/macrame/cms-laravel"
+        }
+    ],
     "keywords": [
         "framework",
         "laravel"
@@ -18,6 +24,7 @@
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
+        "macramejs/cms-laravel": "dev-main",
         "macramejs/macrame-laravel": "^0.0.2"
     },
     "require-dev": {

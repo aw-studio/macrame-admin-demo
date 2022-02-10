@@ -12,21 +12,21 @@ export type State = {
     value: string,
 }
 
-export type Site = {
+export type Page = {
     content: { [key: string]: any };
     id: number;
     name: string;
 };
 
-export type SiteList = RawListItem<Site>;
+export type PageListItem = RawListItem<Page>;
 
 export type DateTimeResource = Resource<DateTime>;
 
 export type StateResource = Resource<State>;
 export type StatesCollectionResource = CollectionResource<State>;
 
-export type SiteResource = Resource<Site>;
-export type SiteCollectionResource = CollectionResource<Site>;
+export type PageResource = Resource<Page>;
+export type PageCollectionResource = CollectionResource<Page>;
 
-export type SiteListResource = Resource<SiteList>;
-export type SiteListCollectionResource = CollectionResource<SiteList>;
+export type PageListResource = Resource<PageListItem>;
+export type PageListCollectionResource = CollectionResource<PageListItem>;

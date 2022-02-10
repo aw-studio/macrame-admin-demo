@@ -18,14 +18,14 @@
             </svg>
         </Button>
     </div>
-    <AddSiteModel :open="isOpen" @close="isOpen = false" />
+    <AddPageModel :open="isOpen" @close="isOpen = false" />
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { Inertia } from '@inertiajs/inertia';
 import { Button } from '@macramejs/admin-vue3';
-import AddSiteModel from './AddSiteModal.vue';
+import AddPageModel from './AddPageModal.vue';
 
 const isOpen = ref(false);
 </script>

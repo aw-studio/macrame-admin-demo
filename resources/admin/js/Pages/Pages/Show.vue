@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, watch } from 'vue';
+import { defineProps, watch, PropType } from 'vue';
 import { Admin } from '@admin/layout';
 import Layout from './package/Layout.vue';
 import { useForm } from '@macramejs/macrame-vue3';
@@ -66,16 +66,16 @@ import { Cabinet } from '@macramejs/page-builder-vue3';
 import BaseLayout from './Index.vue';
 import { saveQueue } from '@admin/modules/save-queue';
 import { ExampleTemplate } from './templates';
-import { SiteResource } from '@admin/modules/resources';
+import { PageResource } from '@admin/modules/resources';
 
 const props = defineProps({
-    site: {
-        type: Object as PropType<SiteResource>,
+    page: {
+        type: Object as PropType<PageResource>,
         required: true,
     },
 });
 
-const form = useForm(`/admin/sites/${props.site.data.id}`, props.site.data, {
+const form = useForm(`/admin/pages/${props.page.data.id}`, props.page.data, {
     method: 'post',
 });
 
@@ -92,7 +92,7 @@ const templates = {
 watch(
     form,
     () => {
-        const queueKey = `site.${props.site.data.id}.content`;
+        const queueKey = `page.${props.page.data.id}.content`;
         console.log({ isDirty: form.isDirty });
         console.log(saveQueue);
 
