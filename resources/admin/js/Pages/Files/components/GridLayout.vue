@@ -1,10 +1,11 @@
 <template>
     <div class="w-full mt-10">
+        {{ url }}
         <div class="grid grid-cols-12 gap-5">
             <div
                 class="flex justify-center col-span-full md:col-span-6 xl:col-span-3"
             >
-                <FileUpload url="/api/media" />
+                <FileUpload :url="url" />
             </div>
             <div
                 v-for="file in files"
@@ -63,8 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, toRef, toRefs, watch } from 'vue';
-import { useDropzone } from 'vue3-dropzone';
+import { ref, toRefs, watch } from 'vue';
 import { FileUpload } from '@macramejs/admin-vue3';
 import FileMenu from './FileMenu.vue';
 
@@ -77,6 +77,10 @@ const props = defineProps({
     files: {
         type: Array,
         required: true,
+    },
+    url: {
+        type: String,
+        default: '/files',
     },
 });
 

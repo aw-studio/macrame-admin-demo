@@ -26,7 +26,7 @@
             </div>
         </template>
         <template v-slot:sidebar-secondary>
-            <SidebarContent />
+            <SidebarContent @update="setUrl" />
         </template>
         <template v-slot:topbar-left> Topbar Left </template>
         <template v-slot:topbar-right>
@@ -143,6 +143,7 @@
                     <TabPanel>
                         <GridLayout
                             v-if="files"
+                            :url="requestUrl"
                             v-model="selected"
                             :files="files"
                         />
@@ -155,31 +156,31 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, ref, watch } from 'vue';
+import { onBeforeMount, onMounted, ref, watch } from 'vue';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
 import { Button, ContextMenu } from '@macramejs/admin-vue3';
 import { Admin } from '@admin/layout';
 import SidebarContent from './components/SidebarContent.vue';
 import GridLayout from './components/GridLayout.vue';
 import ListLayout from './components/ListLayout.vue';
-import axios from 'axios';
+import { fetchItems, route } from './index';
 
 const files = ref(null);
 const selected = ref([]);
+const requestUrl = ref(null);
 
 const edit = () => {
     selected.value = [];
 };
 
-const fetchItems = async () => {
-    try {
-        const { data } = await axios.get('https://picsum.photos/v2/list');
-        files.value = data;
-    } catch (error) {
-        console.log(error);
-    }
+const setUrl = url => {
+    requestUrl.value = url;
+    route.value = url;
 };
+
 onBeforeMount(() => {
-    fetchItems();
+    fetchItems().then(response => {
+        files.value = response;
+    });
 });
 </script>
