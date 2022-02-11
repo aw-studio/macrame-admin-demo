@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Contracts\Restrictable;
 use App\Http\Controllers\SiteController;
+use App\Models\Concerns\IsRestricted;
 use Astrotomic\Fileable\Concerns\HasFiles;
 use Astrotomic\Fileable\Contracts\Fileable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 use Macrame\Cms\Pages\Contracts\Page as PageContract;
 use Macrame\Cms\Pages\Traits\IsPage;
 
-class Page extends Model implements Fileable, PageContract
+class Page extends Model implements Fileable, PageContract, Restrictable
 {
-    use HasFactory, HasFiles, IsPage;
+    use HasFactory, HasFiles, IsPage, IsRestricted;
 
     /**
      * The namespace of the controller that handles pages.
@@ -51,4 +53,14 @@ class Page extends Model implements Fileable, PageContract
         'content'    => '[]',
         'attributes' => '[]',
     ];
+
+    // public function addFile(File $file)
+    // {
+    //     $this->files()->attach($file->id);
+    // }
+
+    // public function files()
+    // {
+
+    // }
 }

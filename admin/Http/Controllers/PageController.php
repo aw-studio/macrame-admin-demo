@@ -92,6 +92,15 @@ class PageController
             'file' => 'required',
         ]);
 
+        $file = File::fromUpload($request->file);
+        $file->group = $request->file_group;
+        $file->save();
+
+        // $collection = Collection::find($request->collection);
+        // $collection->addFile($file);
+
+        // $page->addFile($file);
+
         $page->addFile($validated['file'])->save();
 
         return Redirect::route('admin.sites.show', ['site' => $page]);

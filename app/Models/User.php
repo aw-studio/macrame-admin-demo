@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Contracts\Accessor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Accessor
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Concerns\IsAccessor;
 
     /**
      * The attributes that are mass assignable.
@@ -42,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin'          => 'boolean',
     ];
+
+    public function granted_pages(): BelongsToMany
+    {
+        return $this->granted(Page::class);
+    }
 }
