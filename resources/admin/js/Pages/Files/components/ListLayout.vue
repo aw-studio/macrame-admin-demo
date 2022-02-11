@@ -1,37 +1,38 @@
 <template>
     <div class="w-full mt-10">
         <div class="mb-8">
-            <FileUpload inline url="/api/media" />
+            <FileUpload inline :url="url" @success="index.reload()" />
         </div>
         <div>
-            <!-- TODO: comment in if files are coming via crud -->
-            <!--<Index>
-                <Table :table="table">
+            <Index :table="index">
+                <Table :table="index">
                     <template v-slot:thead>
-                        <FilesTableHead :table="table" />
+                        <FilesTableHead :table="index" />
                     </template>
                     <template v-slot:tbody>
-                        <FilesTableBody :table="table" />
+                        <FilesTableBody :table="index" />
                     </template>
                 </Table>
-            </Index>-->
-            <pre>{{ table }}</pre>
+            </Index>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { FileUpload, Index, Table } from '@macramejs/admin-vue3';
-import { table } from '../index';
+import { index } from '../index';
 import FilesTableBody from './FilesTable/FilesTableBody.vue';
 import FilesTableHead from './FilesTable/FilesTableHead.vue';
 
 const props = defineProps({
-    files: {
-        type: Array,
-        required: true,
+    url: {
+        type: String,
+        default: '/admin/files',
     },
 });
+
+index.loadItems();
+index.reloadOnChange(index.filters);
 </script>
 
 <style scoped>

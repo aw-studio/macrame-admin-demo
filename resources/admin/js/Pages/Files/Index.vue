@@ -26,7 +26,7 @@
             </div>
         </template>
         <template v-slot:sidebar-secondary>
-            <SidebarContent @update="setUrl" />
+            <SidebarContent @update="setFilters" :collections="collections" />
         </template>
         <template v-slot:topbar-left> Topbar Left </template>
         <template v-slot:topbar-right>
@@ -138,16 +138,10 @@
                 </TabList>
                 <TabPanels>
                     <TabPanel>
-                        <ListLayout v-if="files" :files="files" />
+                        <ListLayout :url="requestUrl" />
                     </TabPanel>
                     <TabPanel>
-                        <GridLayout
-                            v-if="files"
-                            :url="requestUrl"
-                            v-model="selected"
-                            :files="files"
-                        />
-                        <pre>{{ selected }}</pre>
+                        <GridLayout :url="requestUrl" v-model="selected" />
                     </TabPanel>
                 </TabPanels>
             </TabGroup>
@@ -163,8 +157,14 @@ import { Admin } from '@admin/layout';
 import SidebarContent from './components/SidebarContent.vue';
 import GridLayout from './components/GridLayout.vue';
 import ListLayout from './components/ListLayout.vue';
-import { fetchItems, route } from './index';
+import { index } from './index';
 
+const props = defineProps({
+    collections: {
+        type: Array,
+        requried: true,
+    },
+});
 const files = ref(null);
 const selected = ref([]);
 const requestUrl = ref(null);
@@ -173,14 +173,23 @@ const edit = () => {
     selected.value = [];
 };
 
-const setUrl = url => {
-    requestUrl.value = url;
-    route.value = url;
+const setFilters = (value: string) => {
+    if (value.includes('collection')) {
+        requestUrl.value = '/admin/files?' + value;
+
+        index.filters.collection = {
+            value: value.split('=')[1],
+        };
+    }
+
+    if (value.includes('type')) {
+        index.filters.type = {
+            value: value.split('=')[1],
+        };
+    }
 };
 
 onBeforeMount(() => {
-    fetchItems().then(response => {
-        files.value = response;
-    });
+    requestUrl.value = '/admin/files';
 });
 </script>

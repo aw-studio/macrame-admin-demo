@@ -2,21 +2,15 @@
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
         <button
             class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            @click="emit('update', '/files?collection=images')"
+            @click="emit('update', 'type=images')"
         >
             Images
         </button>
         <button
             class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            @click="emit('update', '/files?collection=documents')"
+            @click="emit('update', 'type=documents')"
         >
-            Documents
-        </button>
-        <button
-            class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            @click="emit('update', '/files?collection=videos')"
-        >
-            Videos
+            Document
         </button>
     </div>
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
@@ -43,6 +37,7 @@
             <span class="inline-block text-xl"> Collections </span>
             <button
                 class="inline-flex items-center justify-center ml-auto text-white rounded-full h-9 w-9 bg-gradient-to-r from-indigo-900 focus:outline-none focus:ring-4 focus:ring-orange-100 active:from-indigo-500 active:to-indigo-500 to-indigo-900 hover:from-gradient-red-500 hover:to-gradient-orange-500"
+                @click="showNewCollection = !showNewCollection"
             >
                 <svg
                     width="24"
@@ -60,27 +55,50 @@
                 </svg>
             </button>
         </div>
+        <div class="mb-4" v-if="showNewCollection">
+            <Input
+                v-model="form.name"
+                @keyup.enter="submit"
+                placeholder="Enter new name"
+            />
+        </div>
     </div>
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
         <button
+            v-for="collection in collections"
             class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            @click="emit('update', '/files?collection=starter_kit')"
+            @click="emit('update', `collection=${collection.key}`)"
         >
-            Starter Kit
-        </button>
-        <button
-            class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            @click="emit('update', '/files?collection=event_files')"
-        >
-            Event Files
+            <div class="flex justify-between">
+                {{ collection.name }}
+                <span class="text-gray-300"> {{ collection.files_count }}</span>
+            </div>
         </button>
     </div>
 </template>
 
 <script lang="ts" setup>
-import { Link } from '@inertiajs/inertia-vue3';
-
+import { useForm } from '@inertiajs/inertia-vue3';
+import { Input } from '@macramejs/admin-vue3';
+import { ref } from 'vue';
 const emit = defineEmits(['update']);
-
+const props = defineProps({
+    collections: {
+        type: Array,
+        required: true,
+    },
+});
 const updateUrl = url => {};
+
+const showNewCollection = ref(false);
+
+const form = useForm({
+    name: null,
+});
+
+const submit = () => {
+    form.submit('post', '/admin/filecollections/store');
+    form.reset();
+    showNewCollection.value = false;
+};
 </script>
