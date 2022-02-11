@@ -3,6 +3,7 @@
 use Admin\Http\Controllers\Auth\AuthenticatedSessionController;
 use Admin\Http\Controllers\Auth\NewPasswordController;
 use Admin\Http\Controllers\Auth\PasswordResetLinkController;
+use Admin\Http\Controllers\FileCollectionController;
 use Admin\Http\Controllers\FileController;
 use Admin\Http\Controllers\HomeController;
 use Admin\Http\Controllers\PageController;
@@ -23,6 +24,11 @@ Route::group([
     Route::get('/', [HomeController::class, 'show']);
     Route::get('/components', [HomeController::class, 'components']);
     Route::get('/files', [FileController::class, 'index'])->name('files.index');
+    Route::get('/files/items', [FileController::class, 'items'])->name('files.items');
+    Route::post('/files', [FileController::class, 'store']);
+    Route::post('/files/{file}/delete', [FileController::class, 'destroy']);
+
+    Route::post('/filecollections/store', [FileCollectionController::class, 'store']);
 });
 
 Route::group([
