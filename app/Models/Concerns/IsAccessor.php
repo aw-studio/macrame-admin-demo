@@ -22,7 +22,7 @@ trait IsAccessor
         }
 
         // Only owners can grant access to a model.
-        if (! $this->is_owner($model)) {
+        if (! $this->isOwner($model)) {
             throw new AuthorizationException('Unauthorized');
         }
 
@@ -43,7 +43,7 @@ trait IsAccessor
         }
 
         // Only owners can revoke access to a model.
-        if (! $this->is_owner($model)) {
+        if (! $this->isOwner($model)) {
             throw new AuthorizationException('Unauthorized');
         }
 
@@ -62,7 +62,7 @@ trait IsAccessor
 
     public function isOwner(Restrictable $model): bool
     {
-        return $this->is_admin;
+        return $this->is_admin ?: false;
     }
 
     public function hasAccess(Restrictable | Collection $model, Type $type = null): bool

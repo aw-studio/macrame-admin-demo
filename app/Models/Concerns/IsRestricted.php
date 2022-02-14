@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 trait IsRestricted
 {
-    public function grantFor(Model $model, Type $type)
+    public function grantFor(Model $model, Type $type = null)
     {
     }
 
-    public function denyFor(Model $model, Type $type)
+    public function denyFor(Model $model, Type $type = null)
     {
     }
 

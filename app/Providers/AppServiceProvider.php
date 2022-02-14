@@ -26,15 +26,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
-        $page = new Page();
+        // $page = new Page();
 
-        $user = new User();
+        // $user = new User();
 
-        $user->grant($page);
-        $user->deny($page);
-        $user->isOwner($page);
-        $user->hasAccess($page);
-        $user->granted_pages;
+        // $user->grant($page);
+        // $user->deny($page);
+        // $user->isOwner($page);
+        // $user->hasAccess($page);
+        // $user->granted_pages;
 
         // $file->save();
 
