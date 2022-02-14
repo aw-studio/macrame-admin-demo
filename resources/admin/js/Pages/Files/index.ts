@@ -23,3 +23,9 @@ export const index = useIndex<File>({
     sortBy: [],
 });
 
+export const allFiles = useIndex<File>({
+    route: '/admin/files/items',
+    syncUrl: true,
+    sortBy: [],
+});
+

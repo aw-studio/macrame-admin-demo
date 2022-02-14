@@ -1,28 +1,30 @@
 <template>
     <Admin sidebar-secondary>
         <template v-slot:sidebar-secondary-header>
-            <div class="flex items-center space-x-3">
-                <svg
-                    width="24"
-                    height="24"
-                    stroke-width="1"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M22 12.6v7.8a.6.6 0 0 1-.6.6h-7.8a.6.6 0 0 1-.6-.6v-7.8a.6.6 0 0 1 .6-.6h7.8a.6.6 0 0 1 .6.6ZM19.5 14.51l.01-.011"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                    <path
-                        d="m13 18.2 3.5-1.2 5.5 2M2 10V3.6a.6.6 0 0 1 .6-.6h6.178a.6.6 0 0 1 .39.144l3.164 2.712a.6.6 0 0 0 .39.144H21.4a.6.6 0 0 1 .6.6V9M2 10v8.4a.6.6 0 0 0 .6.6H10m-8-9h8"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                </svg>
-                <span class="inline-block text-xl"> Files </span>
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center space-x-3">
+                    <svg
+                        width="24"
+                        height="24"
+                        stroke-width="1"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M22 12.6v7.8a.6.6 0 0 1-.6.6h-7.8a.6.6 0 0 1-.6-.6v-7.8a.6.6 0 0 1 .6-.6h7.8a.6.6 0 0 1 .6.6ZM19.5 14.51l.01-.011"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="m13 18.2 3.5-1.2 5.5 2M2 10V3.6a.6.6 0 0 1 .6-.6h6.178a.6.6 0 0 1 .39.144l3.164 2.712a.6.6 0 0 0 .39.144H21.4a.6.6 0 0 1 .6.6V9M2 10v8.4a.6.6 0 0 0 .6.6H10m-8-9h8"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="inline-block text-xl"> Files </span>
+                </div>
             </div>
         </template>
         <template v-slot:sidebar-secondary>
@@ -85,6 +87,68 @@
                     </button>
                 </div>
             </ContextMenu>
+            <Button
+                @click="openImageModal = true"
+                v-if="requestUrl != '/admin/files'"
+            >
+                <div class="flex items-center gap-1">
+                    <span>Add Files</span>
+                </div>
+            </Button>
+            <Modal v-model:open="openImageModal">
+                <div
+                    class="flex items-center justify-between px-6 pb-6 mb-6 -mx-6 border-b border-gray-100"
+                >
+                    <div class="inline-flex items-center gap-1">
+                        <svg
+                            width="24"
+                            height="24"
+                            stroke-width="1"
+                            class="origin-left scale-75"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M13 21H3.6a.6.6 0 0 1-.6-.6V3.6a.6.6 0 0 1 .6-.6h16.8a.6.6 0 0 1 .6.6V13"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                            <path
+                                d="m3 16 7-3 5.5 2.5M16 10a2 2 0 1 1 0-4 2 2 0 0 1 0 4ZM16 19h3m3 0h-3m0 0v-3m0 3v3"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                        <span class="text-xl">Add Images to Collection</span>
+                    </div>
+                    <div class="inline-flex items-center gap-2">
+                        <Button @click="addFiles"> Add Files </Button>
+                        <button
+                            @click="openImageModal = false"
+                            class="rounded-[8px] bg-gray-100 p-2 hover:bg-gray-200 focus:outline-none hover:scale-90 focus:ring-4 focus:ring-orange-100 transition duration-300"
+                        >
+                            <svg
+                                width="24"
+                                height="24"
+                                stroke-width="1"
+                                class="scale-80"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"
+                                    stroke="currentColor"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <ImageModalContent :url="requestUrl" v-model="selected" />
+            </Modal>
         </template>
         <div class="flex flex-col w-full h-full px-6 py-8">
             <TabGroup :defaultIndex="1">
@@ -152,11 +216,12 @@
 <script lang="ts" setup>
 import { onBeforeMount, onMounted, ref, watch } from 'vue';
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue';
-import { Button, ContextMenu } from '@macramejs/admin-vue3';
+import { Button, ContextMenu, Modal } from '@macramejs/admin-vue3';
 import { Admin } from '@admin/layout';
 import SidebarContent from './components/SidebarContent.vue';
 import GridLayout from './components/GridLayout.vue';
 import ListLayout from './components/ListLayout.vue';
+import ImageModalContent from './components/ImageModalContent.vue';
 import { index } from './index';
 
 const props = defineProps({
@@ -165,7 +230,7 @@ const props = defineProps({
         requried: true,
     },
 });
-const files = ref(null);
+const openImageModal = ref(false);
 const selected = ref([]);
 const requestUrl = ref(null);
 
@@ -174,19 +239,30 @@ const edit = () => {
 };
 
 const setFilters = (value: string) => {
-    if (value.includes('collection')) {
+    if (value.includes('collection') && value.split('=')[1] != null) {
         requestUrl.value = '/admin/files?' + value;
 
         index.filters.collection = {
             value: value.split('=')[1],
         };
     }
+    if (value.includes('collection') && value.split('=')[1] == '') {
+        requestUrl.value = '/admin/files';
+        index.filters.collection = {};
+    }
 
-    if (value.includes('type')) {
+    if (value.includes('type') && value.split('=')[1] != null) {
         index.filters.type = {
             value: value.split('=')[1],
         };
     }
+    if (value.includes('type') && value.split('=')[1] == null) {
+        index.filters.type = {};
+    }
+};
+
+const addFiles = () => {
+    console.log('TODO');
 };
 
 onBeforeMount(() => {
