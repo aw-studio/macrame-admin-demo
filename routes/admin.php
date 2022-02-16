@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => AuthenticateAdmin::class,
 ], function () {
+
+    //
+    Route::get('/', [HomeController::class, 'show']);
+    Route::get('/components', [HomeController::class, 'components']);
+
+    // pages
     Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
     Route::get('/pages/items', [PageController::class, 'items'])->name('pages.items');
     Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
@@ -21,14 +27,15 @@ Route::group([
     Route::post('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
     Route::post('/pages/{page}/upload', [PageController::class, 'upload'])->name('pages.upload');
 
-    Route::get('/', [HomeController::class, 'show']);
-    Route::get('/components', [HomeController::class, 'components']);
-    Route::get('/files', [FileController::class, 'index'])->name('files.index');
-    Route::get('/files/items', [FileController::class, 'items'])->name('files.items');
-    Route::post('/files', [FileController::class, 'store']);
-    Route::post('/files/{file}/delete', [FileController::class, 'destroy']);
+    // files
+    Route::get('/files/items', [FileController::class, 'files'])->name('files.files');
+    Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
 
-    Route::post('/filecollections/store', [FileCollectionController::class, 'store']);
+    // file collections
+    Route::get('/files', [FileCollectionController::class, 'index'])->name('file-collections.index');
+    Route::post('/files', [FileCollectionController::class, 'store'])->name('file-collections.show');
+    Route::get('/files/{collection}', [FileCollectionController::class, 'show'])->name('file-collections.show');
+    Route::post('/files/{collection}/upload', [FileCollectionController::class, 'upload'])->name('file-collections.upload');
 });
 
 Route::group([

@@ -1,0 +1,25 @@
+<template>
+    <SidebarSecondary>
+        <template v-slot:header>
+            <FilesSidebarHeader />
+        </template>
+        <template v-slot:default>
+            <FilesSidebarBody :collections="collections" />
+        </template>
+    </SidebarSecondary>
+</template>
+
+<script lang="ts" setup>
+import { PropType } from 'vue';
+import { SidebarSecondary } from '@macramejs/admin-vue3';
+import FilesSidebarHeader from './FilesSidebarHeader.vue';
+import FilesSidebarBody from './FilesSidebarBody.vue';
+import { FileCollection } from '@admin/modules/resources';
+
+const props = defineProps({
+    collections: {
+        type: Array as PropType<FileCollection[]>,
+        required: true,
+    },
+});
+</script>

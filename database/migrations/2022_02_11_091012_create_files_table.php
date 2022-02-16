@@ -10,7 +10,6 @@ class CreateFilesTable extends Migration
     {
         Schema::create('files', static function (Blueprint $table): void {
             $table->id();
-            $table->uuid('uuid')->unique();
             $table->string('display_name')->nullable();
             $table->string('group')->nullable();
             $table->string('disk');

@@ -2,36 +2,31 @@
 
 namespace App\Models;
 
-use Astrotomic\LaravelEloquentUuid\Eloquent\Concerns\UsesUUID;
-use Awstudio\LaravelFiles\Contracts\FileContract;
-use Awstudio\LaravelFiles\Traits\IsFile;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Macrame\CMS\Media\Contracts\AttachableFile;
+use Macrame\CMS\Media\Traits\IsAttachableFile;
 
-class File extends Model implements FileContract
+class File extends Model implements AttachableFile
 {
-    use UsesUUID;
-    use IsFile;
+    use IsAttachableFile;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'display_name', 'group', 'disk', 'filepath', 'filename', 'mimetype',
+        'size', 'meta',
+    ];
 
     protected $casts = [
         'size' => 'int',
         'meta' => 'json',
     ];
 
-    protected $appends = [
-        'url',
+    protected $attributes = [
+        'disk' => 'public',
     ];
 
-    public static function booted()
+    public function collections(): BelongsToMany
     {
-        self::deleting(function ($file) {
-            $file->model_has_files()->delete();
-        });
-    }
-
-    public function getUrlAttribute()
-    {
-        return $this->storage()->url($this->filepath);
+        return $this->attached(FileCollection::class);
     }
 }

@@ -5,14 +5,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "packages/macrame/cms-laravel"
-        },
-        {
-            "type": "path",
-            "url": "packages/laravel-file-manager",
-            "options": {
-                "symlink": true
-            }
+            "url": "packages/cms-laravel"
         }
     ],
     "keywords": [
@@ -22,8 +15,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "astrotomic/laravel-fileable": "^0.3.0",
-        "aw-studio/laravel-file-manager": "dev-dev",
         "aw-studio/laravel-sites": "dev-main",
         "aw-studio/snippets": "dev-main",
         "fruitcake/laravel-cors": "^2.0",

@@ -2,7 +2,6 @@
 
 namespace Admin\Http\Indexes;
 
-use App\Models\FileCollection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Macrame\Table\Table;
@@ -39,15 +38,8 @@ class FileIndex extends Table
             // query files
 
             $query->whereHas(
-                'model_has_files',
-                function ($query) use ($filters) {
-                    $query
-                        ->where('model_type', FileCollection::class)
-                        ->where(
-                            'model_id',
-                            FileCollection::firstOrCreate(['key' => $filters['collection']])->id
-                        );
-                }
+                'collections',
+                fn ($q) => $q->where('key', $filters['collection'])
             );
         }
 

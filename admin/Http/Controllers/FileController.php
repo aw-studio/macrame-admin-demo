@@ -3,11 +3,11 @@
 namespace Admin\Http\Controllers;
 
 use Admin\Http\Indexes\FileIndex;
+use Admin\Http\Resources\FileResource;
 use Admin\Ui\Page;
 use App\Models\File;
-use App\Models\FileCollection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileController
 {
@@ -17,70 +17,16 @@ class FileController
      * @param  Page $page
      * @return Page
      */
-    public function items(Request $request, FileIndex $index)
+    public function files(Request $request, FileIndex $index)
     {
-        return $index->items(
-            $request,
-            File::query()
-        );
+        return $index->items($request, File::query(), FileResource::class);
     }
 
-    /**
-     * Show the file.
-     *
-     * @param  Page $page
-     * @return Page
-     */
-    public function show(Page $page)
+    public function upload(Request $request)
     {
-        return $page->page('Files/Show');
-    }
-
-    /**
-     * Show the index of all files.
-     *
-     * @param  Page $page
-     * @return Page
-     */
-    public function index(Page $page)
-    {
-        return $page->page('Files/Index')->with(
-            'collections',
-            FileCollection::withCount('files')->get()
-        );
-    }
-
-    /**
-     * Undocumented function.
-     *
-     * @return void
-     */
-    public function store(Request $request)
-    {
-        $addedFiles = new Collection;
-
-        foreach ($request->files->get('files') as $file) {
-            $file = File::fromUpload($file);
-
-            $addedFiles->push($file);
-
-            if ($request->collection) {
-                FileCollection::firstOrCreate(['key' => $request->collection])
-                    ->files()
-                    ->attach($file->id);
-            }
-        }
-
-        return $addedFiles;
-    }
-
-    /**
-     * Undocumented function.
-     *
-     * @return void
-     */
-    public function destroy(Request $request, $file)
-    {
-        // code...
+        collect($request->files->get('images'))
+            ->each(function (UploadedFile $file) {
+                File::newFromUploadedFile($file)->save();
+            });
     }
 }

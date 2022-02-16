@@ -3,16 +3,13 @@
 namespace App\Models;
 
 use App\Http\Controllers\SiteController;
-use Astrotomic\Fileable\Concerns\HasFiles;
-use Astrotomic\Fileable\Contracts\Fileable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Macrame\Cms\Pages\Contracts\Page as PageContract;
-use Macrame\Cms\Pages\Traits\IsPage;
+use Macrame\CMS\Media\Traits\HasFiles;
 
-class Page extends Model implements Fileable, PageContract
+class Page extends Model
 {
-    use HasFactory, HasFiles, IsPage;
+    use HasFactory, HasFiles;
 
     /**
      * The namespace of the controller that handles pages.
