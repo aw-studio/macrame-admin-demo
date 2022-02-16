@@ -4,12 +4,9 @@
             <SidebarPrimary />
         </template>
         <template v-if="sidebarSecondary" v-slot:sidebar-secondary>
-            <SidebarSecondary>
-                <template v-slot:header>
-                    <slot name="sidebar-secondary-header" />
-                </template>
-                <slot name="sidebar-secondary" />
-            </SidebarSecondary>
+            <slot name="sidebar-secondary">
+                <SidebarSecondary />
+            </slot>
         </template>
         <template v-slot:topbar-left>
             <slot name="topbar-left" />
@@ -31,12 +28,10 @@ import { DefaultLayout, SidebarSecondary } from '@macramejs/admin-vue3';
 import SidebarPrimary from './SidebarPrimary.vue';
 import TopbarRight from './TopbarRight.vue';
 
-const props = defineProps({
+defineProps({
     sidebarSecondary: {
         type: Boolean,
         default: false,
     },
 });
-
-console.log(props.sidebarSecondary);
 </script>

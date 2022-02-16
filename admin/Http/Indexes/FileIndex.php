@@ -10,6 +10,11 @@ class FileIndex extends Table
 {
     protected $defaultPerPage = 10;
 
+    protected $mimeTypes = [
+        'images'    => ['image/%'],
+        'documents' => ['application/%'],
+    ];
+
     /**
      * Handle search.
      *
@@ -35,23 +40,36 @@ class FileIndex extends Table
     public function filter(Builder $query, Collection $filters)
     {
         if ($filters->has('collection')) {
-            // query files
-
-            $query->whereHas(
-                'collections',
-                fn ($q) => $q->where('key', $filters['collection'])
-            );
+            $this->filterCollection($query, $filters['collection']);
         }
 
-        if ($filters->has('type')) {
-            if ($filters['type'] == 'images') {
-                $query->where('mimetype', 'like', 'image/%');
-            }
-            if ($filters['type'] == 'documents') {
-                $query->where('mimetype', 'like', 'application/%')
-                    ->orWhere('mimetype', 'like', 'text/%');
-            }
+        if ($filters->has('types')) {
+            $this->filterTypes($query, $filters['types']);
         }
+    }
+
+    protected function filterTypes(Builder $query, $types)
+    {
+        if (! is_array($types)) {
+            return;
+        }
+
+        $query->where(function ($subQuery) use ($types) {
+            foreach ($types as $type) {
+                if (! array_key_exists($type, $this->mimeTypes)) {
+                    continue;
+                }
+
+                foreach ($this->mimeTypes[$type] as $mimeType) {
+                    $subQuery->orWhere('mimetype', 'like', $mimeType);
+                }
+            }
+        });
+    }
+
+    protected function filterCollection(Builder $query, $collection)
+    {
+        $query->whereHas('collections', fn ($q) => $q->where('key', $collection));
     }
 
     /**

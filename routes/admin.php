@@ -28,11 +28,11 @@ Route::group([
     Route::post('/pages/{page}/upload', [PageController::class, 'upload'])->name('pages.upload');
 
     // files
+    Route::get('/files', [FileController::class, 'index'])->name('files.index');
     Route::get('/files/items', [FileController::class, 'files'])->name('files.files');
     Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
 
     // file collections
-    Route::get('/files', [FileCollectionController::class, 'index'])->name('file-collections.index');
     Route::post('/files', [FileCollectionController::class, 'store'])->name('file-collections.show');
     Route::get('/files/{collection}', [FileCollectionController::class, 'show'])->name('file-collections.show');
     Route::post('/files/{collection}/upload', [FileCollectionController::class, 'upload'])->name('file-collections.upload');

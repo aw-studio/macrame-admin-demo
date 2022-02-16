@@ -1,5 +1,5 @@
 <template>
-    <BaseLayout v-bind="$attrs">
+    <BaseLayout v-bind="$attrs" :collection="collection">
         <FilesTabs :collection="collection.data" />
     </BaseLayout>
 </template>
@@ -17,6 +17,4 @@ const props = defineProps({
         requried: true,
     },
 });
-
-index.filters.collection = { value: props.collection.data.key };
 </script>

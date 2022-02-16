@@ -27128,17 +27128,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   props: {
     collections: {
       type: Object,
       requried: true
+    },
+    collection: {
+      type: Object,
+      requried: false
     }
   },
   setup: function setup(__props, _ref) {
+    var _props$collection;
+
     var expose = _ref.expose;
     expose();
     var props = __props;
+    _modules__WEBPACK_IMPORTED_MODULE_2__.index.filters.collection.update((_props$collection = props.collection) === null || _props$collection === void 0 ? void 0 : _props$collection.data);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(props.collection, function () {
+      var _props$collection2;
+
+      return _modules__WEBPACK_IMPORTED_MODULE_2__.index.filters.collection.update((_props$collection2 = props.collection) === null || _props$collection2 === void 0 ? void 0 : _props$collection2.data);
+    }, {
+      immediate: true
+    }); // initially load files.
+
     _modules__WEBPACK_IMPORTED_MODULE_2__.index.loadItems();
     var __returned__ = {
       props: props,
@@ -27171,8 +27187,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _Index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue */ "./resources/admin/js/Pages/Files/Index.vue");
 /* harmony import */ var _components_FilesTabs_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/FilesTabs.vue */ "./resources/admin/js/Pages/Files/components/FilesTabs.vue");
-/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules */ "./resources/admin/js/Pages/Files/modules/index.ts");
-
 
 
 
@@ -27187,9 +27201,6 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    _modules__WEBPACK_IMPORTED_MODULE_3__.index.filters.collection = {
-      value: props.collection.data.key
-    };
     var __returned__ = {
       props: props,
       BaseLayout: _Index_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -27554,6 +27565,10 @@ __webpack_require__.r(__webpack_exports__);
     collections: {
       type: Array,
       required: true
+    },
+    collection: {
+      type: Object,
+      required: false
     }
   },
   setup: function setup(__props, _ref) {
@@ -27590,6 +27605,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _AddCollectionForm_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AddCollectionForm.vue */ "./resources/admin/js/Pages/Files/components/AddCollectionForm.vue");
+/* harmony import */ var _modules__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modules */ "./resources/admin/js/Pages/Files/modules/index.ts");
+
 
 
 
@@ -27599,6 +27616,10 @@ __webpack_require__.r(__webpack_exports__);
     collections: {
       type: Array,
       required: true
+    },
+    collection: {
+      type: Object,
+      required: false
     }
   },
   setup: function setup(__props, _ref) {
@@ -27610,7 +27631,8 @@ __webpack_require__.r(__webpack_exports__);
       props: props,
       showForm: showForm,
       Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
-      AddCollectionForm: _AddCollectionForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+      AddCollectionForm: _AddCollectionForm_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      index: _modules__WEBPACK_IMPORTED_MODULE_3__.index
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -28764,10 +28786,7 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var props = __props;
-    console.log(props.sidebarSecondary);
     var __returned__ = {
-      props: props,
       DefaultLayout: _macramejs_admin_vue3__WEBPACK_IMPORTED_MODULE_1__.DefaultLayout,
       SidebarSecondary: _macramejs_admin_vue3__WEBPACK_IMPORTED_MODULE_1__.SidebarSecondary,
       SidebarPrimary: _SidebarPrimary_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -33148,11 +33167,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "sidebar-secondary": ""
   }, {
     "sidebar-secondary": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      var _$props$collection;
+
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["FilesSidebar"], {
-        collections: $props.collections.data
+        collections: $props.collections.data,
+        collection: (_$props$collection = $props.collection) === null || _$props$collection === void 0 ? void 0 : _$props$collection.data
       }, null, 8
       /* PROPS */
-      , ["collections"])];
+      , ["collections", "collection"])];
     }),
     "topbar-left": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_1];
@@ -33187,7 +33209,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["BaseLayout"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeProps)((0,vue__WEBPACK_IMPORTED_MODULE_0__.guardReactiveProps)(_ctx.$attrs)), {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["BaseLayout"], (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)(_ctx.$attrs, {
+    collection: $props.collection
+  }), {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["FilesTabs"], {
         collection: $props.collection.data
@@ -33200,7 +33224,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 16
   /* FULL_PROPS */
-  );
+  , ["collection"]);
 }
 
 /***/ }),
@@ -33744,10 +33768,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["FilesSidebarBody"], {
-        collections: $props.collections
+        collections: $props.collections,
+        collection: $props.collection
       }, null, 8
       /* PROPS */
-      , ["collections"])];
+      , ["collections", "collection"])];
     }),
     _: 1
     /* STABLE */
@@ -33773,32 +33798,37 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "flex flex-col gap-1 p-2 border-b border-gray-400"
 };
+var _hoisted_2 = {
+  "class": "flex flex-col gap-1 p-2 border-b border-gray-400"
+};
+var _hoisted_3 = {
+  "class": "flex items-center gap-3 px-5 pt-16 pb-6 -mx-2"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "flex items-center justify-between"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Reset Filter"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
-  height: "24",
   "stroke-width": "1",
-  "class": "origin-right scale-80 translate-x-[6px]",
+  height: "24",
   fill: "none",
   xmlns: "http://www.w3.org/2000/svg"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243",
+  d: "M5 19.5V5a2 2 0 0 1 2-2h11.4a.6.6 0 0 1 .6.6V21M9 7h6M6.5 15H19M6.5 18H19M6.5 21H19",
+  stroke: "currentColor",
+  "stroke-linecap": "round"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
+  d: "M6.5 18c-1 0-1.5-.672-1.5-1.5S5.5 15 6.5 15M6.5 21c-1 0-1.5-.672-1.5-1.5S5.5 18 6.5 18",
   stroke: "currentColor",
   "stroke-linecap": "round",
   "stroke-linejoin": "round"
-})])], -1
+})], -1
 /* HOISTED */
 );
 
-var _hoisted_3 = [_hoisted_2];
-var _hoisted_4 = {
-  "class": "flex flex-col gap-1 p-2 border-b border-gray-400"
-};
-var _hoisted_5 = {
-  "class": "flex items-center gap-3 px-5 pt-16 pb-6 -mx-2"
-};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "inline-block text-xl"
+}, " Collections ", -1
+/* HOISTED */
+);
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   width: "24",
@@ -33819,66 +33849,51 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "inline-block text-xl"
-}, " Collections ", -1
-/* HOISTED */
-);
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  width: "24",
-  "stroke-width": "1",
-  height: "24",
-  fill: "none",
-  xmlns: "http://www.w3.org/2000/svg"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M5 19.5V5a2 2 0 0 1 2-2h11.4a.6.6 0 0 1 .6.6V21M9 7h6M6.5 15H19M6.5 18H19M6.5 21H19",
-  stroke: "currentColor",
-  "stroke-linecap": "round"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M6.5 18c-1 0-1.5-.672-1.5-1.5S5.5 15 6.5 15M6.5 21c-1 0-1.5-.672-1.5-1.5S5.5 18 6.5 18",
-  stroke: "currentColor",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_9 = [_hoisted_8];
-var _hoisted_10 = {
+var _hoisted_7 = [_hoisted_6];
+var _hoisted_8 = {
   "class": "flex flex-col gap-1 p-2 border-b border-gray-400"
 };
-var _hoisted_11 = {
+var _hoisted_9 = {
   "class": "flex justify-between"
 };
-var _hoisted_12 = {
+var _hoisted_10 = {
   "class": "text-gray-300"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_ctx.typeName ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
-    key: 0,
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.index.filters.types.value.includes('images') ? 'bg-gray-100' : '', "px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"]),
     onClick: _cache[0] || (_cache[0] = function ($event) {
-      return _ctx.typeName = null;
-    }),
-    "class": "px-4 py-2 rounded-[8px] w-full text-red-signal transition-colors text-left duration-300 hover:bg-red-100"
-  }, _hoisted_3)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <RadioGroup v-model=\"typeName\">\n            <RadioGroupOption v-slot=\"{ checked }\" value=\"images\">\n                <button\n                    :class=\"checked ? 'bg-gray-100' : ''\"\n                    class=\"px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100\"\n                >\n                    Images\n                </button>\n            </RadioGroupOption>\n            <RadioGroupOption v-slot=\"{ checked }\" value=\"documents\">\n                <button\n                    :class=\"checked ? 'bg-gray-100' : ''\"\n                    class=\"px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100\"\n                >\n                    Document\n                </button>\n            </RadioGroupOption>\n        </RadioGroup> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "inline-flex items-center justify-center ml-auto text-white rounded-full h-9 w-9 bg-gradient-to-r from-indigo-900 focus:outline-none focus:ring-4 focus:ring-orange-100 active:from-indigo-500 active:to-indigo-500 to-indigo-900 hover:from-gradient-red-500 hover:to-gradient-orange-500",
+      return $setup.index.filters.types.toggle('images');
+    })
+  }, " Images ", 2
+  /* CLASS */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([$setup.index.filters.types.value.includes('documents') ? 'bg-gray-100' : '', "px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"]),
     onClick: _cache[1] || (_cache[1] = function ($event) {
+      return $setup.index.filters.types.toggle('documents');
+    })
+  }, " Documents ", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "inline-flex items-center justify-center ml-auto text-white rounded-full h-9 w-9 bg-gradient-to-r from-indigo-900 focus:outline-none focus:ring-4 focus:ring-orange-100 active:from-indigo-500 active:to-indigo-500 to-indigo-900 hover:from-gradient-red-500 hover:to-gradient-orange-500",
+    onClick: _cache[2] || (_cache[2] = function ($event) {
       return $setup.showForm = !$setup.showForm;
     })
-  }, _hoisted_9)]), $setup.showForm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AddCollectionForm"], {
+  }, _hoisted_7)]), $setup.showForm ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AddCollectionForm"], {
     key: 0,
     "class": "mb-4"
-  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.collections, function (collection) {
+  })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.collections, function (c) {
+    var _$props$collection, _$props$collection2;
+
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["Link"], {
-      key: collection.id,
-      "class": "px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100",
-      href: "/admin/files/".concat(collection.id)
+      key: c.id,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([c.id == ((_$props$collection = $props.collection) === null || _$props$collection === void 0 ? void 0 : _$props$collection.id) ? 'bg-gray-100' : '', "px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"]),
+      href: c.id == ((_$props$collection2 = $props.collection) === null || _$props$collection2 === void 0 ? void 0 : _$props$collection2.id) ? "/admin/files" : "/admin/files/".concat(c.id)
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(collection.title) + " ", 1
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.title) + " ", 1
         /* TEXT */
-        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(collection.files_count), 1
+        ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.files_count), 1
         /* TEXT */
         )])];
       }),
@@ -33887,7 +33902,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["href"]);
+    , ["class", "href"]);
   }), 128
   /* KEYED_FRAGMENT */
   ))])], 64
@@ -35243,16 +35258,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, [$props.sidebarSecondary ? {
     name: "sidebar-secondary",
     fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SidebarSecondary"], null, {
-        header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "sidebar-secondary-header")];
-        }),
-        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "sidebar-secondary")];
-        }),
-        _: 3
-        /* FORWARDED */
-
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "sidebar-secondary", {}, function () {
+        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["SidebarSecondary"])];
       })];
     })
   } : undefined]), 1024
@@ -36053,17 +36060,27 @@ var useIndex = function useIndex(_ref) {
       for (var key in p) {
         params[prefix + key] = p[key];
       }
-
-      console.log(params);
     },
     __getUrl: function __getUrl() {
-      var params = new URLSearchParams(this.__getParams());
+      var searchParams = new URLSearchParams([]);
 
-      for (var i = 0; i < this.sortBy.length; i++) {
-        params.append('sortBy[]', this.sortBy[i]);
+      var params = this.__getParams();
+
+      for (var key in params) {
+        if (Array.isArray(params[key])) {
+          for (var i = 0; i < params[key].length; i++) {
+            searchParams.append("".concat(key, "[]"), params[key][i]);
+          }
+        } else {
+          searchParams.append(key, encodeURIComponent(params[key]));
+        }
       }
 
-      return "".concat(this.__route, "?").concat(params.toString());
+      for (var _i = 0; _i < this.sortBy.length; _i++) {
+        searchParams.append('sortBy[]', this.sortBy[_i]);
+      }
+
+      return "".concat(this.__route, "?").concat(searchParams.toString());
     },
     __getParams: function __getParams() {
       var params = {
@@ -36082,10 +36099,6 @@ var useIndex = function useIndex(_ref) {
         }
 
         params["filter.".concat(key)] = filters[key];
-      }
-
-      for (var _key in params) {
-        params[_key] = encodeURIComponent(params[_key]);
       }
 
       return params;
@@ -36315,7 +36328,27 @@ __webpack_require__.r(__webpack_exports__);
 var index = (0,_macramejs_macrame_vue3__WEBPACK_IMPORTED_MODULE_0__.useIndex)({
   route: '/admin/files/items',
   syncUrl: true,
-  sortBy: []
+  sortBy: [],
+  filters: {
+    collection: {
+      update: function update(collection) {
+        index.filters.collection.value = collection ? collection.key : null;
+      },
+      value: null
+    },
+    types: {
+      toggle: function toggle(type) {
+        var i = index.filters.types.value.indexOf(type);
+
+        if (i !== -1) {
+          index.filters.types.value.splice(i, 1);
+        } else {
+          index.filters.types.value.push(type);
+        }
+      },
+      value: []
+    }
+  }
 });
 index.reloadOnChange(index.filters);
 var selectedFiles = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);

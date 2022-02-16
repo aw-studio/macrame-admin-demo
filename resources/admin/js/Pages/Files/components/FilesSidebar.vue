@@ -4,7 +4,10 @@
             <FilesSidebarHeader />
         </template>
         <template v-slot:default>
-            <FilesSidebarBody :collections="collections" />
+            <FilesSidebarBody
+                :collections="collections"
+                :collection="collection"
+            />
         </template>
     </SidebarSecondary>
 </template>
@@ -20,6 +23,10 @@ const props = defineProps({
     collections: {
         type: Array as PropType<FileCollection[]>,
         required: true,
+    },
+    collection: {
+        type: Object as PropType<FileCollection>,
+        required: false,
     },
 });
 </script>

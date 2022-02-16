@@ -1,47 +1,27 @@
 <template>
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
         <button
-            v-if="typeName"
-            @click="typeName = null"
-            class="px-4 py-2 rounded-[8px] w-full text-red-signal transition-colors text-left duration-300 hover:bg-red-100"
+            :class="
+                index.filters.types.value.includes('images')
+                    ? 'bg-gray-100'
+                    : ''
+            "
+            class="px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"
+            @click="index.filters.types.toggle('images')"
         >
-            <div class="flex items-center justify-between">
-                <span>Reset Filter</span>
-                <svg
-                    width="24"
-                    height="24"
-                    stroke-width="1"
-                    class="origin-right scale-80 translate-x-[6px]"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M6.758 17.243 12.001 12m5.243-5.243L12 12m0 0L6.758 6.757M12.001 12l5.243 5.243"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                </svg>
-            </div>
+            Images
         </button>
-        <!-- <RadioGroup v-model="typeName">
-            <RadioGroupOption v-slot="{ checked }" value="images">
-                <button
-                    :class="checked ? 'bg-gray-100' : ''"
-                    class="px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"
-                >
-                    Images
-                </button>
-            </RadioGroupOption>
-            <RadioGroupOption v-slot="{ checked }" value="documents">
-                <button
-                    :class="checked ? 'bg-gray-100' : ''"
-                    class="px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"
-                >
-                    Document
-                </button>
-            </RadioGroupOption>
-        </RadioGroup> -->
+        <button
+            :class="
+                index.filters.types.value.includes('documents')
+                    ? 'bg-gray-100'
+                    : ''
+            "
+            class="px-4 py-2 mb-1 rounded-[8px] transition-colors w-full text-left duration-300 hover:bg-gray-100"
+            @click="index.filters.types.toggle('documents')"
+        >
+            Documents
+        </button>
     </div>
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
         <div class="flex items-center gap-3 px-5 pt-16 pb-6 -mx-2">
@@ -94,14 +74,17 @@
     </div>
     <div class="flex flex-col gap-1 p-2 border-b border-gray-400">
         <Link
-            v-for="collection in collections"
-            :key="collection.id"
+            v-for="c in collections"
+            :key="c.id"
+            :class="c.id == collection?.id ? 'bg-gray-100' : ''"
             class="px-4 py-2 rounded-[8px] transition-colors text-left duration-300 hover:bg-gray-100"
-            :href="`/admin/files/${collection.id}`"
+            :href="
+                c.id == collection?.id ? `/admin/files` : `/admin/files/${c.id}`
+            "
         >
             <div class="flex justify-between">
-                {{ collection.title }}
-                <span class="text-gray-300"> {{ collection.files_count }}</span>
+                {{ c.title }}
+                <span class="text-gray-300"> {{ c.files_count }}</span>
             </div>
         </Link>
     </div>
@@ -111,14 +94,20 @@
 import { useForm } from '@macramejs/macrame-vue3';
 import { Input } from '@macramejs/admin-vue3';
 import { Link } from '@inertiajs/inertia-vue3';
-import { PropType, ref } from 'vue';
+import { RadioGroup, RadioGroupOption } from '@headlessui/vue';
+import { PropType, ref, computed } from 'vue';
 import { FileCollection } from '@admin/modules/resources';
 import AddCollectionForm from './AddCollectionForm.vue';
+import { index } from '../modules';
 
 const props = defineProps({
     collections: {
         type: Array as PropType<FileCollection[]>,
         required: true,
+    },
+    collection: {
+        type: Object as PropType<FileCollection>,
+        required: false,
     },
 });
 

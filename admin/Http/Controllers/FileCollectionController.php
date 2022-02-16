@@ -38,23 +38,8 @@ class FileCollectionController
         $collections = FileCollection::withCount('files')->get();
 
         return $page
-            ->page('Files/Show')
-            ->with('collection', new FileCollectionResource($collection))
-            ->with('collections', FileCollectionResource::collection($collections));
-    }
-
-    /**
-     * Show the index of all file collections.
-     *
-     * @param  Page $page
-     * @return Page
-     */
-    public function index(Page $page)
-    {
-        $collections = FileCollection::withCount('files')->get();
-
-        return $page
             ->page('Files/Index')
+            ->with('collection', new FileCollectionResource($collection))
             ->with('collections', FileCollectionResource::collection($collections));
     }
 
