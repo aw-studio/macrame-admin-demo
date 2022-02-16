@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Contracts\Restrictable;
 use App\Http\Controllers\SiteController;
+use App\Models\Concerns\IsRestricted;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Macrame\CMS\Media\Traits\HasFiles;
+use Macrame\CMS\Pages\Contracts\Page as PageContract;
+use Macrame\CMS\Pages\Traits\IsPage;
 
-class Page extends Model
+class Page extends Model implements PageContract, Restrictable
 {
-    use HasFactory, HasFiles;
+    use HasFactory, HasFiles, IsPage, IsRestricted;
 
     /**
      * The namespace of the controller that handles pages.
@@ -48,4 +52,14 @@ class Page extends Model
         'content'    => '[]',
         'attributes' => '[]',
     ];
+
+    // public function addFile(File $file)
+    // {
+    //     $this->files()->attach($file->id);
+    // }
+
+    // public function files()
+    // {
+
+    // }
 }
