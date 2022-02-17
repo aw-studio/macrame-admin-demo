@@ -19,7 +19,7 @@
         <template v-slot:topbar-left> Topbar Left </template>
         <template v-slot:topbar-right> Topbar Right </template>
         <TabGroup>
-            <template v-slot:tab-list>
+            <TabList>
                 <Tab>Buttons</Tab>
                 <Tab>Badges</Tab>
                 <Tab>Checkbox</Tab>
@@ -32,7 +32,7 @@
                 <Tab>Slider</Tab>
                 <Tab>Wysiwyg</Tab>
                 <Tab>Text</Tab>
-            </template>
+            </TabList>
             <TabPanel>
                 <Buttons />
             </TabPanel>
@@ -57,7 +57,14 @@
                     <div class="flex mb-5 space-x-5">
                         <Chip v-model="toggle" label="Foo" />
                     </div>
-                    {{ toggle }}
+                    <div class="flex mb-5 space-x-5">
+                        <ChipInput
+                            class="w-full"
+                            v-model="chips"
+                            placeholder="Foo"
+                        />
+                    </div>
+                    {{ chips }}
                 </div>
             </TabPanel>
             <TabPanel>
@@ -66,6 +73,9 @@
                     <br />
                     <Input disabled v-model="text" />
                     {{ text }}
+                    <br />
+                    <FileUpload url="/api/media" accept="image/*" />
+                    <FileUpload inline url="/api/media" accept="image/*" />
                 </div>
             </TabPanel>
             <TabPanel>
@@ -93,7 +103,10 @@ import {
     Tab,
     TabPanel,
     TabGroup,
+    TabList,
+    FileUpload,
     Card,
+    ChipInput,
     Input,
 } from '../../../../../packages/macramejs/admin-vue3';
 import { ref } from 'vue';
@@ -112,4 +125,7 @@ const text = ref('');
 const number = ref(0);
 
 const toggle = ref(false);
+
+const files = ref(null);
+const chips = ref([]);
 </script>

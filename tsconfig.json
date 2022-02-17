@@ -3,17 +3,17 @@
     "target": "esnext",
     "module": "esnext",
     // this enables stricter inference for data properties on `this`
-    //"strict": true,
+    "strict": false,
     "jsx": "preserve",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": false,
     "paths": {
-        "@app/*": ["./resources/app/js/*"],
+        "@app/*": ["./resources/js/*"],
         "@admin/*": ["./resources/admin/js/*"],
     }
   },
   "include": [
-    "resources/app/js/**/*",
+    "resources/js/**/*",
     "resources/admin/js/**/*"
   ],
   "exclude": [

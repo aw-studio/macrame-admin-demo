@@ -5,14 +5,13 @@ namespace App\Models;
 use App\Contracts\Restrictable;
 use App\Http\Controllers\SiteController;
 use App\Models\Concerns\IsRestricted;
-use Astrotomic\Fileable\Concerns\HasFiles;
-use Astrotomic\Fileable\Contracts\Fileable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Macrame\Cms\Pages\Contracts\Page as PageContract;
-use Macrame\Cms\Pages\Traits\IsPage;
+use Macrame\CMS\Media\Traits\HasFiles;
+use Macrame\CMS\Pages\Contracts\Page as PageContract;
+use Macrame\CMS\Pages\Traits\IsPage;
 
-class Page extends Model implements Fileable, PageContract, Restrictable
+class Page extends Model implements PageContract, Restrictable
 {
     use HasFactory, HasFiles, IsPage, IsRestricted;
 

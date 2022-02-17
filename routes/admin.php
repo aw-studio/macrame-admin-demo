@@ -3,6 +3,8 @@
 use Admin\Http\Controllers\Auth\AuthenticatedSessionController;
 use Admin\Http\Controllers\Auth\NewPasswordController;
 use Admin\Http\Controllers\Auth\PasswordResetLinkController;
+use Admin\Http\Controllers\FileCollectionController;
+use Admin\Http\Controllers\FileController;
 use Admin\Http\Controllers\HomeController;
 use Admin\Http\Controllers\PageController;
 use Admin\Http\Middleware\AuthenticateAdmin;
@@ -11,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => AuthenticateAdmin::class,
 ], function () {
+
+    //
+    Route::get('/', [HomeController::class, 'show']);
+    Route::get('/components', [HomeController::class, 'components']);
+
+    // pages
     Route::get('/pages', [PageController::class, 'index'])->name('pages.index');
     Route::get('/pages/items', [PageController::class, 'items'])->name('pages.items');
     Route::get('/pages/{page}', [PageController::class, 'show'])->name('pages.show');
@@ -19,8 +27,15 @@ Route::group([
     Route::post('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
     Route::post('/pages/{page}/upload', [PageController::class, 'upload'])->name('pages.upload');
 
-    Route::get('/', [HomeController::class, 'show']);
-    Route::get('/components', [HomeController::class, 'components']);
+    // files
+    Route::get('/files', [FileController::class, 'index'])->name('files.index');
+    Route::get('/files/items', [FileController::class, 'files'])->name('files.files');
+    Route::post('/files/upload', [FileController::class, 'upload'])->name('files.upload');
+
+    // file collections
+    Route::post('/files', [FileCollectionController::class, 'store'])->name('file-collections.show');
+    Route::get('/files/{collection}', [FileCollectionController::class, 'show'])->name('file-collections.show');
+    Route::post('/files/{collection}/upload', [FileCollectionController::class, 'upload'])->name('file-collections.upload');
 });
 
 Route::group([

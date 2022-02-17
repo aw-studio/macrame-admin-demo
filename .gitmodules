@@ -10,4 +10,7 @@
 [submodule "packages/macramejs/macrame/macrame"]
   path = packages/macramejs/macrame/macrame
   url = git://github.com/macramejs/macrame/tree/main/packages/macrame
+[submodule "packages/laravel-file-manager"]
+  path = packages/laravel-file-manager
+  url = git://github.com/aw-studio/laravel-files/tree/dev
 

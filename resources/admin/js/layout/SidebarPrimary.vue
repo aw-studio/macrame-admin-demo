@@ -41,22 +41,37 @@
                     </svg>
                 </SidebarLink>
                 <SidebarLink
-                    title="Schiffe"
+                    title="Files"
                     :expanded="expanded"
-                    href="/admin/ships"
+                    href="/admin/files"
                 >
                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="-2 -2 24 24"
                         width="24"
-                        class="w-5 h-5 fill-gray-800"
-                        :class="{
-                            'fill-red-500': page.includes('/admin/ships'),
-                        }"
+                        height="24"
+                        stroke-width="1"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
                     >
                         <path
-                            d="M16.93 11.998A1 1 0 0 1 17 10h2a1 1 0 0 1 0 2h-.055a9.001 9.001 0 0 1-17.89 0H1a1 1 0 0 1 0-2h2a1 1 0 0 1 .07 1.998A7.005 7.005 0 0 0 9 17.929V7.874A4.002 4.002 0 0 1 10 0a4 4 0 0 1 1 7.874v10.055a7.005 7.005 0 0 0 5.93-5.931zM10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
-                        ></path>
+                            d="M22 12.6v7.8a.6.6 0 0 1-.6.6h-7.8a.6.6 0 0 1-.6-.6v-7.8a.6.6 0 0 1 .6-.6h7.8a.6.6 0 0 1 .6.6ZM19.5 14.51l.01-.011"
+                            class="stroke-current"
+                            :class="{
+                                '!stroke-red-500':
+                                    page.includes('/admin/files'),
+                            }"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+                        <path
+                            d="m13 18.2 3.5-1.2 5.5 2M2 10V3.6a.6.6 0 0 1 .6-.6h6.178a.6.6 0 0 1 .39.144l3.164 2.712a.6.6 0 0 0 .39.144H21.4a.6.6 0 0 1 .6.6V9M2 10v8.4a.6.6 0 0 0 .6.6H10m-8-9h8"
+                            class="stroke-current"
+                            :class="{
+                                '!stroke-red-500':
+                                    page.includes('/admin/files'),
+                            }"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
                     </svg>
                 </SidebarLink>
                 <SidebarLink
