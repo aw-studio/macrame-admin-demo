@@ -6,6 +6,7 @@ use Admin\Http\Controllers\Auth\PasswordResetLinkController;
 use Admin\Http\Controllers\FileCollectionController;
 use Admin\Http\Controllers\FileController;
 use Admin\Http\Controllers\HomeController;
+use Admin\Http\Controllers\NavigationController;
 use Admin\Http\Controllers\PageController;
 use Admin\Http\Middleware\AuthenticateAdmin;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,9 @@ Route::group([
     Route::post('/pages/order', [PageController::class, 'order'])->name('pages.order');
     Route::post('/pages/{page}', [PageController::class, 'update'])->name('pages.update');
     Route::post('/pages/{page}/upload', [PageController::class, 'upload'])->name('pages.upload');
+
+    // navigations
+    Route::get('/navigations/{type}', [NavigationController::class, 'show'])->name('navigations.show');
 
     // files
     Route::get('/files', [FileController::class, 'index'])->name('files.index');

@@ -35,6 +35,16 @@ export type FileCollection = {
     key?: string,
 }
 
+export type NavItem = {
+    id?: number,
+    title: string,   
+    route: string,   
+    parent_id: number,
+    children: NavItem[],
+}
+
+export type NavItemTreeItem = RawListItem<NavItem>;
+
 export type PageListItem = RawListItem<Page>;
 
 export type DateTimeResource = Resource<DateTime>;
@@ -47,6 +57,9 @@ export type PageCollectionResource = CollectionResource<Page>;
 
 export type PageListResource = Resource<PageListItem>;
 export type PageListCollectionResource = CollectionResource<PageListItem>;
+
+export type NavItemTreeResource = Resource<NavItemTreeItem>;
+export type NavItemTreeCollectionResource = CollectionResource<NavItemTreeItem>;
 
 export type FileCollectionResource = Resource<FileCollection>;
 export type FileCollectionCollectionResource = CollectionResource<FileCollection>;

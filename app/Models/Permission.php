@@ -14,10 +14,14 @@ class Permission extends Model
         'object_type', 'object_id',
         'user_type', 'user_id',
         'owner_type', 'owner_id',
-        'type',
+        'type', 'foo_state',
     ];
 
     protected $casts = [
         'type' => PermissionType::class,
+    ];
+
+    protected $monitoredAttribute = [
+        'foo_state',
     ];
 }

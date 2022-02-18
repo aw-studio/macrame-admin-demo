@@ -3,13 +3,14 @@
 namespace Macrame\CMS\Pages\Traits;
 
 use Closure;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\QueryException;
 use Illuminate\Routing\Route;
+use Macrame\Tree\Traits\IsTree;
 
 trait IsPage
 {
+    use IsTree;
+
     public static function routes()
     {
         try {
@@ -29,11 +30,6 @@ trait IsPage
         }
     }
 
-    public static function root()
-    {
-        return static::whereRoot()->orderBy('order_column')->get();
-    }
-
     public function getRouteAction(): string | Closure
     {
         return $this->controller;
@@ -46,20 +42,5 @@ trait IsPage
         }
 
         return $this->parent->slug.'/'.$this->slug;
-    }
-
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(static::class, 'parent_id', 'id');
-    }
-
-    public function children(): HasMany
-    {
-        return $this->hasMany(static::class, 'parent_id', 'id');
-    }
-
-    public function scopeWhereRoot($query)
-    {
-        $query->whereNull('parent_id');
     }
 }

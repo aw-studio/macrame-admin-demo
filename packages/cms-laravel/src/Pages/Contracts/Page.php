@@ -5,8 +5,9 @@ namespace Macrame\CMS\Pages\Contracts;
 use Closure;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Macrame\Contracts\Tree\Tree;
 
-interface Page
+interface Page extends Tree
 {
     /**
      * Build the routes.

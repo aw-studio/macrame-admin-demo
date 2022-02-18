@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class FileAttachment extends Pivot
 {
-    use HasFactory;
-
     public $table = 'file_attachments';
 
     /**
