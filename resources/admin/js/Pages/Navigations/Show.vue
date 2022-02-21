@@ -6,7 +6,7 @@
         <template v-slot:topbar-left>
             <slot name="topbar-left" />
         </template>
-        <slot />
+        <NavigationsBody :items="items.data" :type="type" />
     </Admin>
 </template>
 
@@ -14,9 +14,14 @@
 import { PropType } from 'vue';
 import { Admin } from '@admin/layout';
 import NavigationsSidebar from './components/NavigationsSidebar.vue';
+import NavigationsBody from './components/NavigationsBody.vue';
 import { NavItemTreeCollectionResource } from '@admin/modules/resources';
 
 const props = defineProps({
+    type: {
+        type: String,
+        required: true,
+    },
     items: {
         type: Object as PropType<NavItemTreeCollectionResource>,
         required: true,

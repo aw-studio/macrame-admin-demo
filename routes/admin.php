@@ -30,6 +30,8 @@ Route::group([
 
     // navigations
     Route::get('/navigations/{type}', [NavigationController::class, 'show'])->name('navigations.show');
+    Route::post('/navigations/{type}', [NavigationController::class, 'store'])->name('navigations.store');
+    Route::post('/navigations/{type}/order', [NavigationController::class, 'order'])->name('navigations.order');
 
     // files
     Route::get('/files', [FileController::class, 'index'])->name('files.index');

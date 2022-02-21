@@ -15,8 +15,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
-        "aw-studio/laravel-sites": "dev-main",
-        "aw-studio/snippets": "dev-main",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "inertiajs/inertia-laravel": "^0.5.4",
@@ -25,7 +23,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "macramejs/cms-laravel": "dev-main",
-        "macramejs/macrame-laravel": "^0.0.2"
+        "macramejs/macrame-laravel": "dev-main"
     },
     "require-dev": {
         "spatie/laravel-ignition": "^1.0",

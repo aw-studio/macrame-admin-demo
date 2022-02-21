@@ -17,6 +17,6 @@ class NavItem extends Model implements Tree
     ];
 
     protected $casts = [
-        'type' => NavType::class,
+        //'type' => NavType::class,
     ];
 }

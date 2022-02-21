@@ -36,26 +36,15 @@ type PageList = TList<Page>;
 
 const list: PageList = useList<Page>(props.pages);
 
-function parseListOrder(list: PageList) {
-    let order = [];
+list.updateOnChange(props.pages);
 
-    for (let i = 0; i < list.items.length; i++) {
-        order.push({
-            id: list.items[i].value.id,
-            children: parseListOrder(list.items[i].children),
-        });
-    }
-
-    return order;
-}
-
-let originalOrder = useOriginal(parseListOrder(list));
+const queueKey = `pages.order`;
+let originalOrder = useOriginal(list.getOrder());
 
 watch(
     list,
     () => {
-        const queueKey = `pages.order`;
-        const order: any = parseListOrder(list);
+        const order = list.getOrder();
 
         if (originalOrder.matches(order)) {
             saveQueue.remove(queueKey);
@@ -65,14 +54,6 @@ watch(
                 Inertia.post('/admin/pages/order', { order });
             });
         }
-    },
-    { immediate: true, deep: true }
-);
-
-watch(
-    () => props.pages,
-    () => {
-        list.setItems(props.pages);
     },
     { immediate: true, deep: true }
 );

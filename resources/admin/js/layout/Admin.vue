@@ -1,8 +1,6 @@
 <template>
     <DefaultLayout>
-        <template v-slot:sidebar-primary>
-            <SidebarPrimary />
-        </template>
+        <template #sidebar-primary><SidebarPrimary /></template>
         <template v-if="sidebarSecondary" v-slot:sidebar-secondary>
             <slot name="sidebar-secondary">
                 <SidebarSecondary />
